@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QRYerbaDigital - Generador de Códigos QR Profesionales</title>
+  <meta name="description" content="Crea códigos QR personalizados con tu logo. Gratuito, rápido y profesional.">
+
+  <!-- Preload de fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CDN de librerías -->
+  <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Nuestros estilos -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/components/header.css">
+  <link rel="stylesheet" href="./css/components/hero.css">
+  <link rel="stylesheet" href="./css/components/ads.css">
+  <link rel="stylesheet" href="./css/components/generator.css">
+  <link rel="stylesheet" href="./css/components/features.css">
+  <link rel="stylesheet" href="./css/components/testimonials.css">
+  <link rel="stylesheet" href="./css/components/faq.css">
+  <link rel="stylesheet" href="./css/components/cta.css">
+  <link rel="stylesheet" href="./css/components/footer.css">
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-inter">
+  <!-- Header -->
+  <header class="header">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <div class="logo-icon">
+            <i class="fas fa-qrcode"></i>
+          </div>
+          <span class="logo-text">QRYerbaDigital</span>
+        </div>
+
+        <nav class="nav-links">
+          <a href="#generator" class="nav-link">Generador</a>
+          <a href="#features" class="nav-link">Características</a>
+          <a href="#testimonials" class="nav-link">Testimonios</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+
+        <button class="mobile-menu-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="hero-title">Crea Códigos QR <span class="text-emerald-300">Profesionales</span> en Segundos</h1>
+        <p class="hero-subtitle">Diseña, personaliza y comparte códigos QR únicos con tu marca. Totalmente gratuito y
+          fácil de usar.</p>
+        <div class="hero-buttons">
+          <a href="#generator" class="btn btn-primary">Crear QR Gratis</a>
+          <a href="#features" class="btn btn-secondary">Saber Más</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Space -->
+  <section class="ad-space">
+    <div class="container mx-auto px-4">
+      <div class="ad-container">
+        <p class="ad-label">Espacio Publicitario</p>
+        <div class="ad-placeholder">
+          <p>Anuncio (728x90)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QR Generator Section -->
+  <section id="generator" class="generator">
+    <div class="container mx-auto px-4">
+      <div class="section-header">
+        <h2 class="section-title">Genera Tu Código QR</h2>
+        <p class="section-subtitle">Personaliza tu código QR en segundos. Añade tu logo y elige el estilo que prefieras.
+        </p>
+      </div>
+
+      <div class="generator-content">
+        <!-- Generator Form -->
+        <div class="generator-form-container">
+          <div class="generator-form">
+            <div class="form-group">
+              <label for="urlInput" class="form-label">URL o Texto</label>
+              <input type="text" id="urlInput" placeholder="https://tusitio.com o texto para codificar"
+                class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label for="logoInput" class="form-label">Añadir Logo (Opcional)</label>
+              <input type="file" id="logoInput" accept="image/*" class="form-input-file">
+            </div>
+
+            <div class="form-buttons">
+              <button onclick="generarQR()" class="btn btn-primary btn-icon">
+                <i class="fas fa-qrcode"></i> Generar QR
+              </button>
+              <button onclick="descargarQR()" class="btn btn-success btn-icon">
+                <i class="fas fa-download"></i> Descargar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- QR Preview -->
+        <div class="qr-preview-container">
+          <div id="qr-container" class="qr-preview"></div>
+          <p class="qr-placeholder-text">Tu código QR aparecerá aquí</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container mx-auto px-4">
+      <div class="section-header">
+        <h2 class="section-title">Características Destacadas</h2>
+        <p class="section-subtitle">Todo lo que necesitas para crear códigos QR profesionales</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon bg-indigo-100">
+            <i class="fas fa-palette text-indigo-600"></i>
+          </div>
+          <h3 class="feature-title">Personalización Total</h3>
+          <p class="feature-description">Elige colores, estilos y formas para que tu QR sea único.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon bg-emerald-100">
+            <i class="fas fa-image text-emerald-600"></i>
+          </div>
+          <h3 class="feature-title">Añade Tu Logo</h3>
+          <p class="feature-description">Incorpora tu logo para aumentar el reconocimiento de marca.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon bg-blue-100">
+            <i class="fas fa-download text-blue-600"></i>
+          </div>
+          <h3 class="feature-title">Descarga Instantánea</h3>
+          <p class="feature-description">Descarga tu QR en alta calidad en formatos PNG o SVG.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon bg-purple-100">
+            <i class="fas fa-bolt text-purple-600"></i>
+          </div>
+          <h3 class="feature-title">Completamente Gratuito</h3>
+          <p class="feature-description">Genera tantos códigos QR como necesites sin costo alguno.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Space -->
+  <section class="ad-space">
+    <div class="container mx-auto px-4">
+      <div class="ad-container">
+        <p class="ad-label">Espacio Publicitario</p>
+        <div class="ad-placeholder">
+          <p>Anuncio (728x90)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="testimonials">
+    <div class="container mx-auto px-4">
+      <div class="section-header">
+        <h2 class="section-title">Lo Que Dicen Nuestros Usuarios</h2>
+        <p class="section-subtitle">Miles de personas ya están usando QRYerbaDigital para sus proyectos</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"Increíblemente fácil de usar. En minutos tenía mis QR listos para mi campaña de
+            marketing."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar bg-indigo-600">M</div>
+            <div class="author-info">
+              <h4 class="author-name">María González</h4>
+              <p class="author-role">Marketing Manager</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"La posibilidad de añadir mi logo hace que mis QR sean únicos y profesionales."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar bg-emerald-600">C</div>
+            <div class="author-info">
+              <h4 class="author-name">Carlos Ruiz</h4>
+              <p class="author-role">Diseñador Freelance</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"Lo uso regularmente para mis clientes. Rápido, confiable y los resultados son
+            perfectos."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar bg-purple-600">A</div>
+            <div class="author-info">
+              <h4 class="author-name">Ana Martínez</h4>
+              <p class="author-role">Consultora Digital</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq">
+    <div class="container mx-auto px-4">
+      <div class="section-header">
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <p class="section-subtitle">Respuestas a las dudas más comunes sobre nuestro generador de QR</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>¿Es realmente gratuito?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Sí, nuestro generador de QR es completamente gratuito. No tenemos planes de pago ni límites de uso.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>¿Qué formatos de imagen acepta?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Aceptamos los formatos más comunes: JPG, PNG, GIF y SVG para los logos que quieras añadir.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>¿Puedo usar los QR comercialmente?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutamente. Los códigos QR generados son tuyos para usar en cualquier proyecto personal o comercial.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>¿Necesito crear una cuenta?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>No es necesario. Puedes generar y descargar tus QR sin registro alguno.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="cta-title">¿Listo para crear tu código QR?</h2>
+      <p class="cta-subtitle">Únete a miles de usuarios que ya están creando códigos QR profesionales con QRYerbaDigital.</p>
+      <a href="#generator" class="btn btn-primary btn-large">Crear QR Gratis</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container mx-auto px-4">
+      <div class="footer-content">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <div class="logo-icon">
+              <i class="fas fa-qrcode"></i>
+            </div>
+            <span class="logo-text">QRYerbaDigital</span>
+          </div>
+          <p class="footer-description">La forma más fácil de crear códigos QR personalizados y profesionales.</p>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3 class="footer-title">Enlaces Rápidos</h3>
+          <ul class="footer-links">
+            <li><a href="#generator" class="footer-link">Generador QR</a></li>
+            <li><a href="#features" class="footer-link">Características</a></li>
+            <li><a href="#testimonials" class="footer-link">Testimonios</a></li>
+            <li><a href="#faq" class="footer-link">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3 class="footer-title">Legal</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Términos de Servicio</a></li>
+            <li><a href="#" class="footer-link">Política de Privacidad</a></li>
+            <li><a href="#" class="footer-link">Cookies</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3 class="footer-title">Contacto</h3>
+          <ul class="footer-contact">
+            <li class="contact-item">
+              <i class="fas fa-envelope"></i> ronalgaldamez94@gmail.com
+            </li>
+            <li class="contact-item">
+              <i class="fas fa-map-marker-alt"></i> Chalatenango, El Salvador
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023 QRYerbaDigital. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/utils.js"></script>
+  <script src="./js/qr-generator.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+
+</html>
