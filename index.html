@@ -107,6 +107,24 @@
               <input type="file" id="logoInput" accept="image/*" class="form-input-file">
             </div>
 
+            <div class="form-group">
+              <label class="form-label">Tamaño de Descarga</label>
+              <div class="resolution-selector">
+                <select id="resolutionSelect" class="form-input form-select">
+                  <option value="512">512×512 px (Pequeño)</option>
+                  <option value="1024">1024×1024 px (Mediano)</option>
+                  <option value="2048" selected>2048×2048 px (Grande)</option>
+                  <option value="4096">4096×4096 px (Máxima)</option>
+                </select>
+                <select id="formatSelect" class="form-input form-select">
+                  <option value="png">PNG</option>
+                  <option value="jpeg">JPEG</option>
+                  <option value="svg">SVG (Vectorial)</option>
+                </select>
+              </div>
+              <p class="form-hint">SVG es ideal para impresión sin pérdida de calidad.</p>
+            </div>
+
             <div class="form-buttons">
               <button onclick="generarQR()" class="btn btn-primary btn-icon">
                 <i class="fas fa-qrcode"></i> Generar QR
