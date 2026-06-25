@@ -1,45 +1,39 @@
 .features {
   padding: 4rem 0;
-  background-color: var(--light);
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .feature-card {
-  background-color: var(--white);
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  transition: transform 0.3s;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--glass-shadow);
+  transition: transform var(--transition);
 }
 
 .feature-card:hover {
-  transform: translateY(-0.5rem);
+  transform: translateY(-8px);
 }
 
 .feature-icon {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.feature-icon i {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .feature-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text);
+  font-size: 1.4rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 }
 

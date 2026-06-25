@@ -12,27 +12,11 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Funcionalidad del menú móvil
+// Funcionalidad del menú móvil (adaptado a la nueva estructura)
 const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
-const navLinks = document.querySelector(".nav-links");
-
-if (mobileMenuToggle && navLinks) {
+if (mobileMenuToggle) {
   mobileMenuToggle.addEventListener("click", () => {
-    const isVisible = navLinks.style.display === "flex";
-    navLinks.style.display = isVisible ? "none" : "flex";
-
-    if (window.innerWidth < 768) {
-      if (!isVisible) {
-        navLinks.style.flexDirection = "column";
-        navLinks.style.position = "absolute";
-        navLinks.style.top = "100%";
-        navLinks.style.left = "0";
-        navLinks.style.right = "0";
-        navLinks.style.backgroundColor = "white";
-        navLinks.style.padding = "1rem";
-        navLinks.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1)";
-      }
-    }
+    document.body.classList.toggle("nav-open");
   });
 }
 
@@ -73,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   elementsToAnimate.forEach((el) => observer.observe(el));
 });
 
-// Efectos de hover para tarjetas
+// Efectos de hover para tarjetas (mantenido, aunque el CSS también los tiene)
 document
   .querySelectorAll(".feature-card, .testimonial-card")
   .forEach((card) => {
