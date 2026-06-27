@@ -1,22 +1,20 @@
 .ad-space {
-  padding: 1.5rem 0;
-  background: transparent;
+  padding: 1rem 0;
 }
 
 .ad-container {
-  background: rgba(255,255,255,0.3);
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
   padding: 1rem;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.5);
 }
 
 .ad-label {
-  color: var(--gray);
-  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin-bottom: 0.5rem;
 }
 
@@ -25,11 +23,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,0.5);
-  border-radius: 12px;
-  color: #999;
-  font-size: 0.9rem;
-  border: 1px dashed #ccc;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border: 1px dashed var(--border);
   max-width: 728px;
   margin: 0 auto;
 }
