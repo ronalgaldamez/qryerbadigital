@@ -3,8 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QRYerbaDigital - Generador de Códigos QR Profesionales</title>
-  <meta name="description" content="Crea códigos QR personalizados con WiFi, email, teléfono. 100% gratuito.">
+  <title>QRYerbaDigital - Generador de Códigos QR Gratis en Español</title>
+  <meta name="description" content="Crea códigos QR personalizados gratis con WiFi, email, WhatsApp, teléfono, contacto vCard y más. Sin registro y en alta resolución.">
+  <meta name="keywords" content="generador de QR, código QR gratis, crear código QR, QR wifi, QR whatsapp">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="QRYerbaDigital">
+  <link rel="canonical" href="https://qryerbadigital.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="QRYerbaDigital">
+  <meta property="og:title" content="QRYerbaDigital - Generador de Códigos QR Gratis en Español">
+  <meta property="og:description" content="Crea códigos QR personalizados gratis: WiFi, WhatsApp, teléfono, email y más. Sin registro.">
+  <meta property="og:url" content="https://qryerbadigital.com/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="QRYerbaDigital - Generador de Códigos QR Gratis">
+  <meta name="twitter:description" content="Crea códigos QR personalizados gratis: WiFi, WhatsApp, teléfono, email y más.">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "QRYerbaDigital",
+    "url": "https://qryerbadigital.com/",
+    "inLanguage": "es",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://qryerbadigital.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "QRYerbaDigital",
+    "operatingSystem": "Web",
+    "applicationCategory": "DesignApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Generador de códigos QR gratuito y personalizable",
+    "inLanguage": "es"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Es realmente gratuito?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sí, todas las herramientas son 100% gratuitas. Solo mostramos anuncios para mantener el servicio." }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Necesito registrarme?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No, puedes generar y descargar todos los QR sin crear una cuenta." }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo usar los QR para mi negocio?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sí, los QR generados son tuyos y puedes usarlos comercialmente sin restricciones." }
+      }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +88,7 @@
   <link rel="stylesheet" href="./css/components/faq.css">
   <link rel="stylesheet" href="./css/components/cta.css">
   <link rel="stylesheet" href="./css/components/footer.css">
+  <link rel="stylesheet" href="./css/components/cookie-consent.css">
 </head>
 <body>
   <header class="header">
@@ -38,6 +103,7 @@
           <a href="#features" class="nav-link">Características</a>
           <a href="#testimonials" class="nav-link">Testimonios</a>
           <a href="#faq" class="nav-link">FAQ</a>
+          <a href="./blog.html" class="nav-link">Blog</a>
           <a href="#register" class="nav-register">Registrarse</a>
         </nav>
         <button class="mobile-menu-toggle" id="mobileToggle">
@@ -66,7 +132,7 @@
             <div class="hero-stat-label">Gratuito</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-number">4</div>
+            <div class="hero-stat-number">7</div>
             <div class="hero-stat-label">Tipos de QR</div>
           </div>
         </div>
@@ -102,6 +168,15 @@
         </button>
         <button class="pro-tab" data-tab="phone">
           <span class="material-icons-outlined">phone</span> Teléfono
+        </button>
+        <button class="pro-tab" data-tab="whatsapp">
+          <span class="material-icons-outlined">chat</span> WhatsApp
+        </button>
+        <button class="pro-tab" data-tab="vcard">
+          <span class="material-icons-outlined">contact_page</span> Contacto
+        </button>
+        <button class="pro-tab" data-tab="sms">
+          <span class="material-icons-outlined">sms</span> SMS
         </button>
       </div>
 
@@ -206,6 +281,60 @@
           <div class="qr-preview-container">
             <div id="qr-phone-container" class="qr-preview"></div>
             <p class="qr-placeholder-text">Tu QR de teléfono aparecerá aquí</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pro-panel" id="panel-whatsapp">
+        <div class="generator-content">
+          <div class="generator-form-container">
+            <div class="generator-form">
+              <div class="form-group"><label class="form-label">Número de WhatsApp</label><input type="tel" id="waNumber" class="form-input" placeholder="+503 1234 5678"></div>
+              <div class="form-group"><label class="form-label">Mensaje (opcional)</label><textarea id="waMessage" rows="2" class="form-input" placeholder="Hola, me gustaría más información"></textarea></div>
+              <button onclick="generarQRWhatsApp()" class="btn btn-primary"><span class="material-icons-outlined">chat</span> Generar QR WhatsApp</button>
+              <button id="downloadWhatsAppBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
+            </div>
+          </div>
+          <div class="qr-preview-container">
+            <div id="qr-whatsapp-container" class="qr-preview"></div>
+            <p class="qr-placeholder-text">Tu QR de WhatsApp aparecerá aquí</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pro-panel" id="panel-vcard">
+        <div class="generator-content">
+          <div class="generator-form-container">
+            <div class="generator-form">
+              <div class="form-group"><label class="form-label">Nombre completo</label><input type="text" id="vcName" class="form-input" placeholder="Juan Pérez"></div>
+              <div class="form-group"><label class="form-label">Teléfono</label><input type="tel" id="vcPhone" class="form-input" placeholder="+503 1234 5678"></div>
+              <div class="form-group"><label class="form-label">Correo</label><input type="email" id="vcEmail" class="form-input" placeholder="correo@ejemplo.com"></div>
+              <div class="form-group"><label class="form-label">Empresa (opcional)</label><input type="text" id="vcOrg" class="form-input" placeholder="Mi Empresa"></div>
+              <div class="form-group"><label class="form-label">Página web (opcional)</label><input type="text" id="vcUrl" class="form-input" placeholder="https://tusitio.com"></div>
+              <button onclick="generarQRVcard()" class="btn btn-primary"><span class="material-icons-outlined">contact_page</span> Generar QR Contacto</button>
+              <button id="downloadVcardBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
+            </div>
+          </div>
+          <div class="qr-preview-container">
+            <div id="qr-vcard-container" class="qr-preview"></div>
+            <p class="qr-placeholder-text">Tu QR de contacto aparecerá aquí</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pro-panel" id="panel-sms">
+        <div class="generator-content">
+          <div class="generator-form-container">
+            <div class="generator-form">
+              <div class="form-group"><label class="form-label">Número</label><input type="tel" id="smsNumber" class="form-input" placeholder="+503 1234 5678"></div>
+              <div class="form-group"><label class="form-label">Mensaje (opcional)</label><textarea id="smsMessage" rows="2" class="form-input" placeholder="Hola, te escribo desde tu código QR"></textarea></div>
+              <button onclick="generarQRSms()" class="btn btn-primary"><span class="material-icons-outlined">sms</span> Generar QR SMS</button>
+              <button id="downloadSmsBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
+            </div>
+          </div>
+          <div class="qr-preview-container">
+            <div id="qr-sms-container" class="qr-preview"></div>
+            <p class="qr-placeholder-text">Tu QR de SMS aparecerá aquí</p>
           </div>
         </div>
       </div>
@@ -384,9 +513,9 @@
         <div class="footer-column">
           <h3 class="footer-title">Legal</h3>
           <ul class="footer-links">
-            <li><a href="#" class="footer-link">Términos de Servicio</a></li>
-            <li><a href="#" class="footer-link">Política de Privacidad</a></li>
-            <li><a href="#" class="footer-link">Cookies</a></li>
+            <li><a href="./terms.html" class="footer-link">Términos de Servicio</a></li>
+            <li><a href="./privacy.html" class="footer-link">Política de Privacidad</a></li>
+            <li><a href="./cookies.html" class="footer-link">Política de Cookies</a></li>
           </ul>
         </div>
         <div class="footer-column">
@@ -398,13 +527,38 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2024 QRYerbaDigital. Todos los derechos reservados.</p>
+        <p>&copy; <span id="year"></span> QRYerbaDigital. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
 
+  <div id="cookieConsentBanner" class="cookie-consent" role="dialog" aria-label="Consentimiento de cookies">
+    <div class="cookie-consent-inner">
+      <p class="cookie-consent-text">
+        Usamos cookies para garantizar el funcionamiento del generador, analizar el tráfico y mostrar
+        anuncios. Puedes aceptarlas o rechazarlas. Más información en nuestra
+        <a href="./privacy.html">Política de Privacidad</a> y
+        <a href="./cookies.html">Política de Cookies</a>.
+      </p>
+      <div class="cookie-consent-buttons">
+        <button id="cookieAccept" class="cookie-btn cookie-btn-accept">Aceptar todas</button>
+        <button id="cookieDecline" class="cookie-btn cookie-btn-decline">Solo esenciales</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configura aquí tu Publisher ID de AdSense y tu Measurement ID de Google Analytics.
+    // Cuando hayas obtenido tus IDs, reemplaza los valores y la publicidad/analítica
+    // se cargarán automáticamente SOLO si el usuario acepta las cookies.
+    window.CookieConsentSettings = {
+      adsenseDataAdClient: "ca-pub-XXXXXXXXXXXXXXXX",
+      gaMeasurementId: "G-XXXXXXXXXX"
+    };
+  </script>
   <script src="./js/utils.js"></script>
   <script src="./js/qr-generator.js"></script>
+  <script src="./js/cookie-consent.js"></script>
   <script src="./js/main.js"></script>
 </body>
 </html>

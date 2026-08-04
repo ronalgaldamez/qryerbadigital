@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    let qrCode, qrWifi, qrEmail, qrPhone;
+    let qrCode, qrWifi, qrEmail, qrPhone, qrWhatsApp, qrVcard, qrSms;
 
     document.addEventListener('DOMContentLoaded', () => {
         // Inicializar QR General
@@ -54,6 +54,12 @@
         qrEmail.append(document.getElementById("qr-email-container"));
         qrPhone = new QRCodeStyling({ width:250, height:250, data:"", dotsOptions:{color:"#e84393"} });
         qrPhone.append(document.getElementById("qr-phone-container"));
+        qrWhatsApp = new QRCodeStyling({ width:250, height:250, data:"", dotsOptions:{color:"#25d366"} });
+        qrWhatsApp.append(document.getElementById("qr-whatsapp-container"));
+        qrVcard = new QRCodeStyling({ width:250, height:250, data:"", dotsOptions:{color:"#0984e3"} });
+        qrVcard.append(document.getElementById("qr-vcard-container"));
+        qrSms = new QRCodeStyling({ width:250, height:250, data:"", dotsOptions:{color:"#e17055"} });
+        qrSms.append(document.getElementById("qr-sms-container"));
 
         // Pestañas
         document.querySelectorAll('.pro-tab').forEach(tab => {
@@ -70,6 +76,9 @@
         document.getElementById("downloadWifiBtn")?.addEventListener("click", () => qrWifi.download({ name: "qr_wifi", extension: "png" }));
         document.getElementById("downloadEmailBtn")?.addEventListener("click", () => qrEmail.download({ name: "qr_email", extension: "png" }));
         document.getElementById("downloadPhoneBtn")?.addEventListener("click", () => qrPhone.download({ name: "qr_phone", extension: "png" }));
+        document.getElementById("downloadWhatsAppBtn")?.addEventListener("click", () => qrWhatsApp.download({ name: "qr_whatsapp", extension: "png" }));
+        document.getElementById("downloadVcardBtn")?.addEventListener("click", () => qrVcard.download({ name: "qr_vcard", extension: "png" }));
+        document.getElementById("downloadSmsBtn")?.addEventListener("click", () => qrSms.download({ name: "qr_sms", extension: "png" }));
 
         // Formulario CTA
         document.getElementById("proForm")?.addEventListener("submit", function(e) {
@@ -168,6 +177,50 @@
         if (!phone) return alert("Ingresa el número.");
         qrPhone.update({ data: `tel:${phone}` });
         const btn = document.getElementById("downloadPhoneBtn");
+        if (btn) btn.style.display = 'inline-flex';
+    };
+
+    window.generarQRWhatsApp = function() {
+        let phone = document.getElementById("waNumber")?.value.trim();
+        const msg = document.getElementById("waMessage")?.value.trim();
+        if (!phone) return alert("Ingresa el número de WhatsApp.");
+        phone = phone.replace(/\D/g, "");
+        if (phone.startsWith("0")) phone = phone.slice(1);
+        let data = `https://wa.me/${phone}`;
+        if (msg) data += `?text=${encodeURIComponent(msg)}`;
+        qrWhatsApp.update({ data });
+        const btn = document.getElementById("downloadWhatsAppBtn");
+        if (btn) btn.style.display = 'inline-flex';
+    };
+
+    window.generarQRVcard = function() {
+        const name = document.getElementById("vcName")?.value.trim();
+        const ph = document.getElementById("vcPhone")?.value.trim();
+        const em = document.getElementById("vcEmail")?.value.trim();
+        const org = document.getElementById("vcOrg")?.value.trim();
+        const url = document.getElementById("vcUrl")?.value.trim();
+        if (!name) return alert("Ingresa el nombre.");
+        if (!ph && !em) return alert("Ingresa al menos un teléfono o correo.");
+        let vcf = "BEGIN:VCARD\nVERSION:3.0\n";
+        vcf += `FN:${name}\n`;
+        if (org) vcf += `ORG:${org}\n`;
+        if (ph) vcf += `TEL:${ph}\n`;
+        if (em) vcf += `EMAIL:${em}\n`;
+        if (url) vcf += `URL:${url}\n`;
+        vcf += "END:VCARD";
+        qrVcard.update({ data: vcf });
+        const btn = document.getElementById("downloadVcardBtn");
+        if (btn) btn.style.display = 'inline-flex';
+    };
+
+    window.generarQRSms = function() {
+        const phone = document.getElementById("smsNumber")?.value.trim();
+        const msg = document.getElementById("smsMessage")?.value.trim();
+        if (!phone) return alert("Ingresa el número.");
+        let data = `SMSTO:${phone}`;
+        if (msg) data += `:${msg}`;
+        qrSms.update({ data });
+        const btn = document.getElementById("downloadSmsBtn");
         if (btn) btn.style.display = 'inline-flex';
     };
 })();

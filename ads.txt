@@ -1,0 +1,3 @@
+# ads.txt para Google AdSense
+# Reemplaza ca-pub-XXXXXXXXXXXXXXXX con tu Publisher ID real antes de solicitar AdSense.
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

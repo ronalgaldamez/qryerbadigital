@@ -1,3 +1,7 @@
+// Año dinámico en el footer
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
 // Navegación suave para enlaces de anclaje
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
