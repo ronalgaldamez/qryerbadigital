@@ -65,6 +65,16 @@
         "@type": "Question",
         "name": "¿Puedo usar los QR para mi negocio?",
         "acceptedAnswer": { "@type": "Answer", "text": "Sí, los QR generados son tuyos y puedes usarlos comercialmente sin restricciones." }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Guardan mis datos o mi historial?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Todo se procesa en tu navegador y tu historial se guarda solo en el almacenamiento local de tu dispositivo." }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué formatos puedo descargar?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Puedes descargar tus QR en PNG, JPG o SVG en alta resolución, ideal para imprimir." }
       }
     ]
   }
@@ -104,6 +114,8 @@
           <a href="#testimonials" class="nav-link">Testimonios</a>
           <a href="#faq" class="nav-link">FAQ</a>
           <a href="./blog.html" class="nav-link">Blog</a>
+          <a href="./about.html" class="nav-link">Sobre nosotros</a>
+          <a href="./contact.html" class="nav-link">Contacto</a>
           <a href="#register" class="nav-register">Registrarse</a>
         </nav>
         <button class="mobile-menu-toggle" id="mobileToggle">
@@ -132,7 +144,7 @@
             <div class="hero-stat-label">Gratuito</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-number">7</div>
+            <div class="hero-stat-number">9</div>
             <div class="hero-stat-label">Tipos de QR</div>
           </div>
         </div>
@@ -177,6 +189,12 @@
         </button>
         <button class="pro-tab" data-tab="sms">
           <span class="material-icons-outlined">sms</span> SMS
+        </button>
+        <button class="pro-tab" data-tab="location">
+          <span class="material-icons-outlined">location_on</span> Ubicación
+        </button>
+        <button class="pro-tab" data-tab="event">
+          <span class="material-icons-outlined">event</span> Evento
         </button>
       </div>
 
@@ -338,6 +356,43 @@
           </div>
         </div>
       </div>
+
+      <div class="pro-panel" id="panel-location">
+        <div class="generator-content">
+          <div class="generator-form-container">
+            <div class="generator-form">
+              <div class="form-group"><label class="form-label">Dirección o lugar</label><textarea id="locAddress" rows="3" class="form-input" placeholder="Calle El Progreso 123, San Salvador, El Salvador"></textarea></div>
+              <p class="form-hint" style="color:var(--text-muted);font-size:0.8rem;margin:-0.5rem 0 1rem;">El teléfono abre Google Maps con esta dirección.</p>
+              <button onclick="generarQRLocation()" class="btn btn-primary"><span class="material-icons-outlined">location_on</span> Generar QR Ubicación</button>
+              <button id="downloadLocationBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
+            </div>
+          </div>
+          <div class="qr-preview-container">
+            <div id="qr-location-container" class="qr-preview"></div>
+            <p class="qr-placeholder-text">Tu QR de ubicación aparecerá aquí</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pro-panel" id="panel-event">
+        <div class="generator-content">
+          <div class="generator-form-container">
+            <div class="generator-form">
+              <div class="form-group"><label class="form-label">Título del evento</label><input type="text" id="evTitle" class="form-input" placeholder="Taller de marketing digital"></div>
+              <div class="form-group"><label class="form-label">Descripción (opcional)</label><textarea id="evDesc" rows="2" class="form-input" placeholder="Aprende a crear códigos QR para tu negocio"></textarea></div>
+              <div class="form-group"><label class="form-label">Ubicación (opcional)</label><input type="text" id="evLocation" class="form-input" placeholder="Centro Cultural, San Salvador"></div>
+              <div class="form-group"><label class="form-label">Fecha de inicio</label><input type="datetime-local" id="evStart" class="form-input"></div>
+              <div class="form-group"><label class="form-label">Fecha de fin (opcional)</label><input type="datetime-local" id="evEnd" class="form-input"></div>
+              <button onclick="generarQREvent()" class="btn btn-primary"><span class="material-icons-outlined">event</span> Generar QR Evento</button>
+              <button id="downloadEventBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
+            </div>
+          </div>
+          <div class="qr-preview-container">
+            <div id="qr-event-container" class="qr-preview"></div>
+            <p class="qr-placeholder-text">Tu QR de evento aparecerá aquí</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -460,15 +515,27 @@
       <div class="faq-container">
         <div class="faq-item">
           <div class="faq-question"><h3>¿Es realmente gratuito?</h3><i class="fas fa-chevron-down"></i></div>
-          <div class="faq-answer"><p>Sí, todas las herramientas son 100% gratuitas. Solo mostramos anuncios para mantener el servicio.</p></div>
+          <div class="faq-answer"><p>Sí, todas las herramientas son 100% gratuitas e ilimitadas. Solo mostramos anuncios para mantener el servicio en funcionamiento y poder seguir ofreciéndolo sin coste.</p></div>
         </div>
         <div class="faq-item">
           <div class="faq-question"><h3>¿Necesito registrarme?</h3><i class="fas fa-chevron-down"></i></div>
-          <div class="faq-answer"><p>No, puedes generar y descargar todos los QR sin crear una cuenta. El registro será opcional cuando llegue el backend.</p></div>
+          <div class="faq-answer"><p>No, puedes generar y descargar todos los QR sin crear una cuenta. El registro será opcional cuando llegue el backend, solo para quienes quieran guardar y organizar sus códigos en la nube.</p></div>
         </div>
         <div class="faq-item">
           <div class="faq-question"><h3>¿Puedo usar los QR para mi negocio?</h3><i class="fas fa-chevron-down"></i></div>
-          <div class="faq-answer"><p>Absolutamente. Los QR generados son tuyos y puedes usarlos comercialmente sin restricciones.</p></div>
+          <div class="faq-answer"><p>Absolutamente. Los QR generados son tuyos y puedes usarlos comercialmente sin restricciones, en menus, tarjetas, carteles o cualquier material de marketing.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question"><h3>¿Guardan mis datos o mi historial?</h3><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer"><p>No. Todo se procesa en tu navegador y tu historial reciente se guarda solo en el almacenamiento local de tu dispositivo. No lo enviamos a ningún servidor y puedes borrarlo cuando quieras.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question"><h3>¿Qué formatos puedo descargar?</h3><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer"><p>Puedes descargar tus QR en alta resolución en formato PNG, JPG o SVG (hasta 4096 px), ideal para imprimir en tarjetas, flyers y materiales profesionales.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question"><h3>¿Cuántos tipos de QR ofrece?</h3><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer"><p>Actualmente puedes crear 9 tipos: URL/texto, WiFi, email, teléfono, WhatsApp, contacto vCard, SMS, ubicación y eventos. Todo en una misma y sencilla interfaz.</p></div>
         </div>
       </div>
     </div>
@@ -507,6 +574,9 @@
             <li><a href="#generator" class="footer-link">Generador QR</a></li>
             <li><a href="#features" class="footer-link">Características</a></li>
             <li><a href="#faq" class="footer-link">FAQ</a></li>
+            <li><a href="./blog.html" class="footer-link">Blog</a></li>
+            <li><a href="./about.html" class="footer-link">Sobre nosotros</a></li>
+            <li><a href="./contact.html" class="footer-link">Contacto</a></li>
             <li><a href="#register" class="footer-link">Registrarse</a></li>
           </ul>
         </div>

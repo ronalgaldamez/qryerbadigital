@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    let qrCode, qrWifi, qrEmail, qrPhone, qrWhatsApp, qrVcard, qrSms;
+    let qrCode, qrWifi, qrEmail, qrPhone, qrWhatsApp, qrVcard, qrSms, qrLocation, qrEvent;
 
     document.addEventListener('DOMContentLoaded', () => {
         // Inicializar QR General
@@ -60,6 +60,10 @@
         qrVcard.append(document.getElementById("qr-vcard-container"));
         qrSms = new QRCodeStyling({ width:250, height:250, data:"", dotsOptions:{color:"#e17055"} });
         qrSms.append(document.getElementById("qr-sms-container"));
+        qrLocation = new QRCodeStyling({ width:250, height:250, data:"", dotsOptions:{color:"#00cec9"} });
+        qrLocation.append(document.getElementById("qr-location-container"));
+        qrEvent = new QRCodeStyling({ width:250, height:250, data:"", dotsOptions:{color:"#d63031"} });
+        qrEvent.append(document.getElementById("qr-event-container"));
 
         // Pestañas
         document.querySelectorAll('.pro-tab').forEach(tab => {
@@ -79,6 +83,8 @@
         document.getElementById("downloadWhatsAppBtn")?.addEventListener("click", () => qrWhatsApp.download({ name: "qr_whatsapp", extension: "png" }));
         document.getElementById("downloadVcardBtn")?.addEventListener("click", () => qrVcard.download({ name: "qr_vcard", extension: "png" }));
         document.getElementById("downloadSmsBtn")?.addEventListener("click", () => qrSms.download({ name: "qr_sms", extension: "png" }));
+        document.getElementById("downloadLocationBtn")?.addEventListener("click", () => qrLocation.download({ name: "qr_ubicacion", extension: "png" }));
+        document.getElementById("downloadEventBtn")?.addEventListener("click", () => qrEvent.download({ name: "qr_evento", extension: "png" }));
 
         // Formulario CTA
         document.getElementById("proForm")?.addEventListener("submit", function(e) {
@@ -221,6 +227,35 @@
         if (msg) data += `:${msg}`;
         qrSms.update({ data });
         const btn = document.getElementById("downloadSmsBtn");
+        if (btn) btn.style.display = 'inline-flex';
+    };
+
+    window.generarQRLocation = function() {
+        const address = document.getElementById("locAddress")?.value.trim();
+        if (!address) return alert("Ingresa una dirección.");
+        qrLocation.update({ data: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}` });
+        const btn = document.getElementById("downloadLocationBtn");
+        if (btn) btn.style.display = 'inline-flex';
+    };
+
+    window.generarQREvent = function() {
+        const title = document.getElementById("evTitle")?.value.trim();
+        const desc = document.getElementById("evDesc")?.value.trim();
+        const loc = document.getElementById("evLocation")?.value.trim();
+        const start = document.getElementById("evStart")?.value;
+        if (!title) return alert("Ingresa el título del evento.");
+        if (!start) return alert("Selecciona la fecha de inicio.");
+        const toIcsDate = (v) => v.replace(/[-:]/g, "").replace("T", "");
+        let vevent = "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\n";
+        vevent += `SUMMARY:${title}\n`;
+        if (desc) vevent += `DESCRIPTION:${desc}\n`;
+        if (loc) vevent += `LOCATION:${loc}\n`;
+        vevent += `DTSTART:${toIcsDate(start)}\n`;
+        const end = document.getElementById("evEnd")?.value;
+        if (end) vevent += `DTEND:${toIcsDate(end)}\n`;
+        vevent += "END:VEVENT\nEND:VCALENDAR";
+        qrEvent.update({ data: vevent });
+        const btn = document.getElementById("downloadEventBtn");
         if (btn) btn.style.display = 'inline-flex';
     };
 })();
