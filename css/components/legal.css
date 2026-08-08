@@ -65,6 +65,49 @@
   text-decoration: underline;
 }
 
+.legal-content .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.legal-content .form-label {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+.legal-content .form-input {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition);
+  resize: vertical;
+}
+
+.legal-content .form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
+}
+
+.legal-content .form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.legal-content .form-group .form-input {
+  text-align: left;
+}
+
+.legal-content .btn {
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .legal-content {
     padding: 1.75rem;
