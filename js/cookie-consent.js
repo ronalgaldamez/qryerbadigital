@@ -43,8 +43,10 @@
     // Se ejecuta al dar consentimiento o si el usuario ya había aceptado antes.
     if (!level || !level.analytics) return;
 
-    // Google AdSense. Reemplaza PASTE-REVIEW with tu publisher ID.
-    if (settings.adsenseDataAdClient && !document.querySelector('[data-script="adsense"]')) {
+    const isPlaceholder = (v) => !v || v.indexOf('XXXX') !== -1;
+
+    // Google AdSense. Solo se carga cuando configures tu Publisher ID real.
+    if (settings.adsenseDataAdClient && !isPlaceholder(settings.adsenseDataAdClient) && !document.querySelector('[data-script="adsense"]')) {
       const s = document.createElement('script');
       s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + settings.adsenseDataAdClient;
       s.async = true;
@@ -56,8 +58,8 @@
       } catch (e) {}
     }
 
-    // Google Analytics 4. Reemplaza PASTE-REVIEW con tu Measurement ID.
-    if (settings.gaMeasurementId && !window['ga-gt' + settings.gaMeasurementId]) {
+    // Google Analytics 4. Solo se carga cuando configures tu Measurement ID real.
+    if (settings.gaMeasurementId && !isPlaceholder(settings.gaMeasurementId) && !window['ga-gt' + settings.gaMeasurementId]) {
       injectScript('https://www.googletagmanager.com/gtag/js?id=' + settings.gaMeasurementId);
       const s2 = document.createElement('script');
       s2.innerHTML =
