@@ -429,11 +429,12 @@
             <div class="register-benefit"><i class="fas fa-folder"></i> Organízalos por carpetas</div>
             <div class="register-benefit"><i class="fas fa-chart-line"></i> Estadísticas de escaneo</div>
           </div>
-          <form id="registerForm" class="register-form">
-            <input type="text" placeholder="Tu nombre" class="form-input" disabled>
-            <input type="email" placeholder="tu@email.com" class="form-input" disabled>
-            <button type="submit" class="btn btn-ghost" disabled><i class="fas fa-bell"></i> Avísame cuando esté listo</button>
+          <form id="registerForm" class="register-form" action="https://formspree.io/f/mbgrdgow" method="POST">
+            <input type="text" name="name" placeholder="Tu nombre" class="form-input" required>
+            <input type="email" name="email" placeholder="tu@email.com" class="form-input" required>
+            <button type="submit" class="btn btn-ghost"><i class="fas fa-bell"></i> Avísame cuando esté listo</button>
           </form>
+          <p id="registerMsg" class="register-note"></p>
           <p class="register-note">Mientras tanto, puedes usar el generador gratuito sin registro.</p>
         </div>
       </div>
@@ -545,8 +546,8 @@
     <div class="container">
       <h2 class="cta-title"><span class="material-icons-outlined">rocket_launch</span> ¿Quieres más? Próximamente Plan Pro</h2>
       <p class="cta-subtitle">Sin anuncios, con estadísticas y almacenamiento en la nube. Déjanos tu email y te avisaremos.</p>
-      <form id="proForm" class="cta-form">
-        <input type="email" placeholder="tu@email.com" required class="cta-input">
+      <form id="proForm" class="cta-form" action="https://formspree.io/f/xnpajpdr" method="POST">
+        <input type="email" name="email" placeholder="tu@email.com" required class="cta-input">
         <button type="submit" class="btn btn-accent">Avísame</button>
       </form>
       <p id="proMsg" class="cta-message"></p>

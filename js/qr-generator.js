@@ -86,16 +86,37 @@
         document.getElementById("downloadLocationBtn")?.addEventListener("click", () => qrLocation.download({ name: "qr_ubicacion", extension: "png" }));
         document.getElementById("downloadEventBtn")?.addEventListener("click", () => qrEvent.download({ name: "qr_evento", extension: "png" }));
 
-        // Formulario CTA
-        document.getElementById("proForm")?.addEventListener("submit", function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            const msg = document.getElementById("proMsg");
-            if (msg) {
-                msg.textContent = `¡Gracias! Te avisaremos a ${email}`;
-            }
-            this.reset();
-        });
+        // Envío de formularios a Formspree (registro y Plan Pro)
+        const bindFormspree = (formId, msgId) => {
+            const form = document.getElementById(formId);
+            if (!form) return;
+            form.addEventListener("submit", async function(e) {
+                e.preventDefault();
+                const msg = document.getElementById(msgId);
+                const btn = this.querySelector('button[type="submit"]');
+                const original = btn ? btn.textContent : "";
+                if (msg) msg.textContent = "Enviando...";
+                if (btn) btn.disabled = true;
+                try {
+                    const res = await fetch(this.action, {
+                        method: "POST",
+                        body: new FormData(this),
+                        headers: { "Accept": "application/json" }
+                    });
+                    if (res.ok) {
+                        if (msg) { msg.textContent = "¡Gracias! Te avisaremos cuando esté listo."; msg.style.color = "#059669"; }
+                        this.reset();
+                    } else {
+                        if (msg) { msg.textContent = "Ocurrió un error, inténtalo de nuevo."; msg.style.color = "#dc2626"; }
+                    }
+                } catch (err) {
+                    if (msg) { msg.textContent = "Error de conexión, inténtalo de nuevo."; msg.style.color = "#dc2626"; }
+                }
+                if (btn) { btn.disabled = false; btn.textContent = original; }
+            });
+        };
+        bindFormspree("registerForm", "registerMsg");
+        bindFormspree("proForm", "proMsg");
     });
 
     function actualizarEstilo() {
