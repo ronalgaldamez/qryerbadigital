@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contacto | QRYerbaDigital</title>
-  <meta name="description" content="Contacta con el equipo de QRYerbaDigital si tienes dudas, sugerencias o quieres reportar un error.">
+  <title>Contacto | QR Gratis</title>
+  <meta name="description" content="Contacta con el equipo de QR Gratis si tienes dudas, sugerencias o quieres reportar un error.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://qryerbadigital.com/contact.html">
+  <link rel="canonical" href="https://qrgratis.net/contact.html">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
       <div class="header-inner">
         <a href="./index.html" class="logo">
           <div class="logo-icon"><i class="fas fa-qrcode"></i></div>
-          <span class="logo-text">QRYerbaDigital</span>
+          <span class="logo-text">QR Gratis</span>
         </a>
         <nav class="nav-links" id="navLinks">
           <a href="./index.html#generator" class="nav-link">Generador</a>
@@ -80,7 +80,7 @@
         <div class="footer-column">
           <div class="footer-logo">
             <div class="logo-icon"><i class="fas fa-qrcode"></i></div>
-            <span class="logo-text">QRYerbaDigital</span>
+            <span class="logo-text">QR Gratis</span>
           </div>
           <p class="footer-description">La forma más fácil de crear códigos QR personalizados y profesionales.</p>
         </div>
@@ -103,7 +103,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; <span id="year"></span> QRYerbaDigital. Todos los derechos reservados.</p>
+        <p>&copy; <span id="year"></span> QR Gratis. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
@@ -116,7 +116,7 @@
       const email = document.getElementById("contactEmail").value.trim();
       const msg = document.getElementById("contactMessage").value.trim();
       if (!msg) return;
-      const subject = encodeURIComponent("Contacto desde QRYerbaDigital" + (name ? " - " + name : ""));
+      const subject = encodeURIComponent("Contacto desde QR Gratis" + (name ? " - " + name : ""));
       const body = encodeURIComponent((email ? "Responder a: " + email + "\n\n" : "") + msg);
       window.location.href = "mailto:ronalgaldamez94@gmail.com?subject=" + subject + "&body=" + body;
       document.getElementById("contactMsg").textContent = "Abriendo tu cliente de correo...";

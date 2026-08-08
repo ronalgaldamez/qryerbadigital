@@ -7,7 +7,7 @@
         // Inicializar QR General
         qrCode = new QRCodeStyling({
             width: 250, height: 250, type: "canvas",
-            data: "https://qryerbadigital.com",
+            data: "https://qrgratis.net",
             dotsOptions: { color: "#6c5ce7", type: "rounded" },
             backgroundOptions: { color: "#ffffff" },
             imageOptions: { crossOrigin: "anonymous", margin: 8 }
