@@ -21,6 +21,21 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://qryerbadigital.com/blog/menu-digital-qr-restaurantes.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://qryerbadigital.com/blog/qr-contacto-vcard-tarjetas.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://qryerbadigital.com/blog/errores-comunes-imprimir-qr.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://qryerbadigital.com/about.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
