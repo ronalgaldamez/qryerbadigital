@@ -2,6 +2,19 @@
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+// Botón de copiar dirección BTC de donaciones
+const copyBtcBtn = document.getElementById("copyBtcBtn");
+if (copyBtcBtn) {
+  copyBtcBtn.addEventListener("click", () => {
+    const addr = document.getElementById("btcAddress").textContent;
+    navigator.clipboard.writeText(addr).then(() => {
+      const original = copyBtcBtn.innerHTML;
+      copyBtcBtn.innerHTML = '<i class="fas fa-check"></i> Copiado';
+      setTimeout(() => { copyBtcBtn.innerHTML = original; }, 2000);
+    });
+  });
+}
+
 // Navegación suave para enlaces de anclaje
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
