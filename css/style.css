@@ -16,7 +16,29 @@
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-accent: 0 8px 24px rgba(108, 92, 231, 0.28);
   --transition: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --bg-secondary: #111827;
+  --bg-card: #1e293b;
+  --text: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --accent: #8b7cf7;
+  --accent-light: #a29bfe;
+  --accent-teal: #2dd4bf;
+  --border: #334155;
+  --border-light: #1e293b;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-accent: 0 8px 24px rgba(139, 124, 247, 0.25);
+  color-scheme: dark;
 }
 
 * {
@@ -35,6 +57,7 @@ body {
   color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -44,6 +67,13 @@ body {
   padding: 24px 0;
 }
 
+/* Accesibilidad: foco visible consistente */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ------------------------------ Botones ------------------------------ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -68,6 +98,8 @@ body {
 
 .btn-primary:hover {
   background: #5a4bd1;
+  box-shadow: var(--shadow-accent);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -79,6 +111,7 @@ body {
 .btn-secondary:hover {
   border-color: var(--text-muted);
   background: var(--bg-secondary);
+  transform: translateY(-1px);
 }
 
 .btn-success {
@@ -88,6 +121,7 @@ body {
 
 .btn-success:hover {
   background: #047857;
+  transform: translateY(-1px);
 }
 
 .btn-accent {
@@ -97,6 +131,8 @@ body {
 
 .btn-accent:hover {
   background: #5a4bd1;
+  box-shadow: var(--shadow-accent);
+  transform: translateY(-1px);
 }
 
 .btn-ghost {
@@ -110,6 +146,7 @@ body {
   background: var(--border-light);
 }
 
+/* --------------------------- Cabeceras sección --------------------------- */
 .section-header {
   text-align: center;
   max-width: 640px;
@@ -131,7 +168,43 @@ body {
 }
 
 .text-gradient {
-  color: var(--accent);
+  background: linear-gradient(120deg, var(--accent) 0%, var(--accent-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ------------------------ Animaciones al hacer scroll ------------------------ */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-animate].animate-in {
+  opacity: 1;
+  transform: none;
+}
+
+[data-animate="fade"] {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-animate] {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 768px) {

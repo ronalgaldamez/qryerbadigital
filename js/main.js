@@ -37,6 +37,24 @@ if (mobileMenuToggle) {
   });
 }
 
+// Cerrar el menú móvil al pulsar cualquier enlace dentro de él
+document.querySelectorAll(".nav-links a").forEach((link) => {
+  link.addEventListener("click", () => {
+    if (document.body.classList.contains("nav-open")) {
+      document.body.classList.remove("nav-open");
+    }
+  });
+});
+
+// Funcionalidad del acordeón de personalización avanzada
+const advancedToggle = document.getElementById("advancedToggle");
+if (advancedToggle) {
+  advancedToggle.addEventListener("click", () => {
+    const accordion = document.getElementById("advancedAccordion");
+    if (accordion) accordion.classList.toggle("open");
+  });
+}
+
 // Funcionalidad del acordeón FAQ
 document.querySelectorAll(".faq-question").forEach((question) => {
   question.addEventListener("click", () => {
@@ -62,28 +80,11 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add("animate-in");
+      observer.unobserve(entry.target);
     }
   });
 }, observerOptions);
 
-// Observar elementos para animación
 document.addEventListener("DOMContentLoaded", () => {
-  const elementsToAnimate = document.querySelectorAll(
-    ".feature-card, .testimonial-card"
-  );
-  elementsToAnimate.forEach((el) => observer.observe(el));
+  document.querySelectorAll("[data-animate]").forEach((el) => observer.observe(el));
 });
-
-// Efectos de hover para tarjetas (mantenido, aunque el CSS también los tiene)
-document
-  .querySelectorAll(".feature-card, .testimonial-card")
-  .forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      card.style.transform = "translateY(-5px)";
-      card.style.transition = "transform 0.3s ease";
-    });
-
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "translateY(0)";
-    });
-  });

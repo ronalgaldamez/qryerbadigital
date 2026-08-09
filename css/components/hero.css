@@ -2,6 +2,43 @@
   padding: 6rem 0 4rem;
   text-align: center;
   position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Fondo decorativo: halos de color */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.hero::before {
+  width: 480px;
+  height: 480px;
+  top: -160px;
+  left: -140px;
+  background: radial-gradient(circle, rgba(108, 92, 231, 0.22), transparent 70%);
+}
+
+.hero::after {
+  width: 420px;
+  height: 420px;
+  bottom: -180px;
+  right: -120px;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.18), transparent 70%);
+}
+
+[data-theme="dark"] .hero::before {
+  background: radial-gradient(circle, rgba(139, 124, 247, 0.3), transparent 70%);
+}
+
+[data-theme="dark"] .hero::after {
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.22), transparent 70%);
 }
 
 .hero-content {
@@ -15,6 +52,7 @@
   margin-bottom: 1.25rem;
   line-height: 1.15;
   letter-spacing: -0.04em;
+  animation: heroFadeUp 0.7s ease both;
 }
 
 .hero-subtitle {
@@ -23,6 +61,7 @@
   max-width: 560px;
   margin: 0 auto 2rem;
   line-height: 1.7;
+  animation: heroFadeUp 0.7s ease 0.12s both;
 }
 
 .hero-buttons {
@@ -31,6 +70,27 @@
   gap: 0.75rem;
   justify-content: center;
   align-items: center;
+  animation: heroFadeUp 0.7s ease 0.24s both;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 0.5rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+  animation: heroFadeUp 0.7s ease both;
+}
+
+.hero-badge i {
+  color: var(--accent);
 }
 
 .hero-stats {
@@ -40,6 +100,7 @@
   margin-top: 3.5rem;
   padding-top: 2rem;
   border-top: 1px solid var(--border-light);
+  animation: heroFadeUp 0.7s ease 0.36s both;
 }
 
 .hero-stat-number {
@@ -52,6 +113,17 @@
   font-size: 0.85rem;
   color: var(--text-muted);
   margin-top: 2px;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (min-width: 640px) {

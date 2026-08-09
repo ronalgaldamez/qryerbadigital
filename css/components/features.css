@@ -14,11 +14,13 @@
   border-radius: var(--radius);
   padding: 1.75rem;
   text-align: center;
-  transition: border-color var(--transition);
+  transition: transform var(--transition-slow), border-color var(--transition), box-shadow var(--transition-slow);
 }
 
 .feature-card:hover {
-  border-color: var(--border);
+  border-color: var(--accent-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
 }
 
 .feature-icon {
@@ -32,6 +34,13 @@
   justify-content: center;
   font-size: 1.25rem;
   color: var(--accent);
+  transition: background-color 0.3s ease, transform var(--transition-slow);
+}
+
+.feature-card:hover .feature-icon {
+  background: var(--accent);
+  color: white;
+  transform: scale(1.05);
 }
 
 .feature-title {

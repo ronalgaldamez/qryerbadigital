@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/components/header.css">
   <link rel="stylesheet" href="../css/components/footer.css">
   <link rel="stylesheet" href="../css/components/blog.css">
+  <script src="../js/theme.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -42,16 +43,22 @@
           <a href="../about.html" class="nav-link">Sobre nosotros</a>
           <a href="../contact.html" class="nav-link">Contacto</a>
         </nav>
-        <button class="mobile-menu-toggle" id="mobileToggle">
-          <i class="fas fa-bars"></i>
-        </button>
+        <div class="header-right">
+          <button class="theme-toggle" type="button" aria-label="Cambiar tema">
+            <i class="fas fa-moon icon-moon"></i>
+            <i class="fas fa-sun icon-sun"></i>
+          </button>
+          <button class="mobile-menu-toggle" id="mobileToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
       </div>
     </div>
   </header>
 
   <section class="blog">
     <div class="container">
-      <article class="blog-article">
+      <article class="blog-article" data-animate>
         <h1>QR de WiFi para cafés y restaurantes: guía completa</h1>
         <p class="blog-article-meta">Por QR Gratis · 3 de agosto de 2026 · 8 min de lectura</p>
 
@@ -158,6 +165,7 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="../js/main.js"></script>
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

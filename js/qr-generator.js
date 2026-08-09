@@ -25,6 +25,11 @@
         document.getElementById("errorLevel")?.addEventListener("change", e => {
             qrCode.update({ qrOptions: { errorCorrectionLevel: e.target.value } });
         });
+        document.getElementById("dotShape")?.addEventListener("change", actualizarEstilo);
+        document.getElementById("eyeShape")?.addEventListener("change", actualizarEstilo);
+        document.getElementById("eyeFrameShape")?.addEventListener("change", actualizarEstilo);
+
+        construirPickers();
         document.getElementById("logoInput")?.addEventListener("change", function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -119,20 +124,95 @@
         bindFormspree("proForm", "proMsg");
     });
 
+    function construirPickers() {
+        const definiciones = [
+            { pickerId: "dotShapePicker", selectId: "dotShape", opciones: ["square", "dots", "rounded", "classy", "classy-rounded", "extra-rounded"] },
+            { pickerId: "eyeShapePicker", selectId: "eyeShape", opciones: ["square", "dot"] },
+            { pickerId: "eyeFrameShapePicker", selectId: "eyeFrameShape", opciones: ["square", "dot", "extra-rounded"] }
+        ];
+
+        const nombres = {
+            square: "Cuadrado", dots: "Puntos", rounded: "Redondeado",
+            classy: "Elegante", "classy-rounded": "Eleg. redon.", "extra-rounded": "Extra redon.",
+            dot: "Punto"
+        };
+
+        definiciones.forEach(({ pickerId, selectId, opciones }) => {
+            const picker = document.getElementById(pickerId);
+            const select = document.getElementById(selectId);
+            if (!picker || !select) return;
+
+            picker.innerHTML = "";
+            const seleccionado = select.value || "rounded";
+
+            opciones.forEach(tipo => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "style-option" + (tipo === seleccionado ? " active" : "");
+                btn.dataset.tipo = tipo;
+
+                const preview = document.createElement("div");
+                preview.className = "style-option-preview";
+                btn.appendChild(preview);
+
+                const label = document.createElement("span");
+                label.className = "style-option-label";
+                label.textContent = nombres[tipo] || tipo;
+                btn.appendChild(label);
+
+                const mini = new QRCodeStyling({
+                    width: 60, height: 60, type: "svg",
+                    data: "https://qrgratis.net",
+                    qrOptions: { errorCorrectionLevel: "M" },
+                    dotsOptions: { color: "#6c5ce7", type: pickerId === "dotShapePicker" ? tipo : "rounded" },
+                    cornersDotOptions: { color: "#6c5ce7", type: pickerId === "eyeShapePicker" ? tipo : "dot" },
+                    cornersSquareOptions: { color: "#6c5ce7", type: pickerId === "eyeFrameShapePicker" ? tipo : "square" }
+                });
+                mini.append(preview);
+
+                btn.addEventListener("click", () => {
+                    select.value = tipo;
+                    picker.querySelectorAll(".style-option").forEach(o => o.classList.remove("active"));
+                    btn.classList.add("active");
+                    actualizarEstilo();
+                });
+
+                picker.appendChild(btn);
+            });
+        });
+    }
+
     function actualizarEstilo() {
         if (!qrCode) return;
         qrCode.update({
-            dotsOptions: { color: document.getElementById("colorQR")?.value || "#6c5ce7" },
+            dotsOptions: {
+                color: document.getElementById("colorQR")?.value || "#6c5ce7",
+                type: document.getElementById("dotShape")?.value || "rounded"
+            },
+            cornersDotOptions: {
+                color: document.getElementById("colorQR")?.value || "#6c5ce7",
+                type: document.getElementById("eyeShape")?.value || "dot"
+            },
+            cornersSquareOptions: {
+                color: document.getElementById("colorQR")?.value || "#6c5ce7",
+                type: document.getElementById("eyeFrameShape")?.value || "square"
+            },
             backgroundOptions: { color: document.getElementById("colorBg")?.value || "#ffffff" }
         });
+    }
+
+    function mostrarQR(bodyId, btnId) {
+        const body = document.getElementById(bodyId);
+        if (body) body.classList.add('has-qr');
+        const btn = document.getElementById(btnId);
+        if (btn) btn.style.display = 'inline-flex';
     }
 
     function generarQR() {
         const url = document.getElementById("urlInput")?.value.trim();
         if (!url) return alert("Ingresa una URL o texto.");
         qrCode.update({ data: url });
-        const downloadBtn = document.getElementById("downloadBtn");
-        if (downloadBtn) downloadBtn.style.display = 'inline-flex';
+        mostrarQR("body-general", "downloadBtn");
 
         const entry = {
             url,
@@ -140,6 +220,9 @@
             bg: document.getElementById("colorBg")?.value,
             size: document.getElementById("sizeSlider")?.value,
             ec: document.getElementById("errorLevel")?.value,
+            dots: document.getElementById("dotShape")?.value,
+            eye: document.getElementById("eyeShape")?.value,
+            frame: document.getElementById("eyeFrameShape")?.value,
             date: new Date().toLocaleString()
         };
         let hist = JSON.parse(localStorage.getItem('qrHistory')) || [];
@@ -167,8 +250,25 @@
                 document.getElementById("sizeSlider").value = item.size || 250;
                 document.getElementById("sizeValue").textContent = item.size || 250;
                 document.getElementById("errorLevel").value = item.ec || 'M';
+                document.getElementById("dotShape").value = item.dots || 'rounded';
+                document.getElementById("eyeShape").value = item.eye || 'dot';
+                document.getElementById("eyeFrameShape").value = item.frame || 'square';
+                sincronizarPickers();
                 actualizarEstilo();
                 qrCode.update({ data: item.url, width: parseInt(item.size)||250, height: parseInt(item.size)||250, qrOptions: { errorCorrectionLevel: item.ec || 'M' } });
+                mostrarQR("body-general", "downloadBtn");
+            });
+        });
+    }
+
+    function sincronizarPickers() {
+        const mapeo = { dotShapePicker: "dotShape", eyeShapePicker: "eyeShape", eyeFrameShapePicker: "eyeFrameShape" };
+        Object.keys(mapeo).forEach(pickerId => {
+            const picker = document.getElementById(pickerId);
+            const select = document.getElementById(mapeo[pickerId]);
+            if (!picker || !select) return;
+            picker.querySelectorAll(".style-option").forEach(o => {
+                o.classList.toggle("active", o.dataset.tipo === select.value);
             });
         });
     }
@@ -180,8 +280,7 @@
         const sec = document.getElementById("wifiSecurity")?.value;
         if (!ssid) return alert("Ingresa el SSID.");
         qrWifi.update({ data: `WIFI:T:${sec};S:${ssid};P:${pass};;` });
-        const btn = document.getElementById("downloadWifiBtn");
-        if (btn) btn.style.display = 'inline-flex';
+        mostrarQR("body-wifi", "downloadWifiBtn");
     };
 
     window.generarQREmail = function() {
@@ -195,16 +294,14 @@
         if (body) params.push(`body=${encodeURIComponent(body)}`);
         if (params.length) mailto += '?' + params.join('&');
         qrEmail.update({ data: mailto });
-        const btn = document.getElementById("downloadEmailBtn");
-        if (btn) btn.style.display = 'inline-flex';
+        mostrarQR("body-email", "downloadEmailBtn");
     };
 
     window.generarQRPhone = function() {
         const phone = document.getElementById("phoneNumber")?.value.trim();
         if (!phone) return alert("Ingresa el número.");
         qrPhone.update({ data: `tel:${phone}` });
-        const btn = document.getElementById("downloadPhoneBtn");
-        if (btn) btn.style.display = 'inline-flex';
+        mostrarQR("body-phone", "downloadPhoneBtn");
     };
 
     window.generarQRWhatsApp = function() {
@@ -216,8 +313,7 @@
         let data = `https://wa.me/${phone}`;
         if (msg) data += `?text=${encodeURIComponent(msg)}`;
         qrWhatsApp.update({ data });
-        const btn = document.getElementById("downloadWhatsAppBtn");
-        if (btn) btn.style.display = 'inline-flex';
+        mostrarQR("body-whatsapp", "downloadWhatsAppBtn");
     };
 
     window.generarQRVcard = function() {
@@ -236,8 +332,7 @@
         if (url) vcf += `URL:${url}\n`;
         vcf += "END:VCARD";
         qrVcard.update({ data: vcf });
-        const btn = document.getElementById("downloadVcardBtn");
-        if (btn) btn.style.display = 'inline-flex';
+        mostrarQR("body-vcard", "downloadVcardBtn");
     };
 
     window.generarQRSms = function() {
@@ -247,16 +342,14 @@
         let data = `SMSTO:${phone}`;
         if (msg) data += `:${msg}`;
         qrSms.update({ data });
-        const btn = document.getElementById("downloadSmsBtn");
-        if (btn) btn.style.display = 'inline-flex';
+        mostrarQR("body-sms", "downloadSmsBtn");
     };
 
     window.generarQRLocation = function() {
         const address = document.getElementById("locAddress")?.value.trim();
         if (!address) return alert("Ingresa una dirección.");
         qrLocation.update({ data: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}` });
-        const btn = document.getElementById("downloadLocationBtn");
-        if (btn) btn.style.display = 'inline-flex';
+        mostrarQR("body-location", "downloadLocationBtn");
     };
 
     window.generarQREvent = function() {
@@ -276,7 +369,6 @@
         if (end) vevent += `DTEND:${toIcsDate(end)}\n`;
         vevent += "END:VEVENT\nEND:VCALENDAR";
         qrEvent.update({ data: vevent });
-        const btn = document.getElementById("downloadEventBtn");
-        if (btn) btn.style.display = 'inline-flex';
+        mostrarQR("body-event", "downloadEventBtn");
     };
 })();

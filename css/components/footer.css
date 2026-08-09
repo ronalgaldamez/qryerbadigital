@@ -68,6 +68,8 @@
   background: var(--accent);
   border-color: var(--accent);
   color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
 }
 
 .footer-title {

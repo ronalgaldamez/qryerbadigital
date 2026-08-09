@@ -2,6 +2,23 @@
   padding: 4rem 0;
   text-align: center;
   background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  filter: blur(80px);
+  top: -120px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(108, 92, 231, 0.18), transparent 70%);
+  pointer-events: none;
 }
 
 .cta-title {
@@ -46,7 +63,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
   outline: none;
-  transition: border-color var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .cta-input:focus {

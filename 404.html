@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/components/header.css">
   <link rel="stylesheet" href="./css/components/footer.css">
+  <script src="./js/theme.js"></script>
 </head>
 <body>
   <header class="header">
@@ -31,16 +32,22 @@
           <a href="./about.html" class="nav-link">Sobre nosotros</a>
           <a href="./contact.html" class="nav-link">Contacto</a>
         </nav>
-        <button class="mobile-menu-toggle" id="mobileToggle">
-          <i class="fas fa-bars"></i>
-        </button>
+        <div class="header-right">
+          <button class="theme-toggle" type="button" aria-label="Cambiar tema">
+            <i class="fas fa-moon icon-moon"></i>
+            <i class="fas fa-sun icon-sun"></i>
+          </button>
+          <button class="mobile-menu-toggle" id="mobileToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
       </div>
     </div>
   </header>
 
   <section class="legal">
     <div class="container">
-      <div class="legal-content" style="text-align:center;">
+      <div class="legal-content" data-animate="fade" style="text-align:center;">
         <div class="logo-icon" style="width:64px;height:64px;font-size:1.75rem;margin:0 auto 1.5rem;border-radius:16px;">
           <i class="fas fa-qrcode"></i>
         </div>

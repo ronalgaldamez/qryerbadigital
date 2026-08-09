@@ -18,6 +18,7 @@
   max-width: 440px;
   width: 100%;
   text-align: center;
+  box-shadow: var(--shadow-md);
 }
 
 .register-icon {
@@ -93,6 +94,11 @@
   font-size: 0.78rem;
   font-weight: 500;
   margin-bottom: 1.25rem;
+}
+
+[data-theme="dark"] .register-badge {
+  background: rgba(253, 224, 71, 0.15);
+  color: #fde047;
 }
 
 .register-form .btn {

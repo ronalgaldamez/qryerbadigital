@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QR Gratis - Generador de Códigos QR en Español</title>
-  <meta name="description" content="Crea códigos QR personalizados gratis con WiFi, email, WhatsApp, teléfono, contacto vCard y más. Sin registro y en alta resolución.">
-  <meta name="keywords" content="generador de QR, código QR gratis, crear código QR, QR wifi, QR whatsapp">
+  <title>QR Gratis - Generador de Códigos QR que Nunca Caducan</title>
+  <meta name="description" content="Crea códigos QR personalizados gratis que nunca caducan: WiFi, WhatsApp, email, teléfono y más. La información va dentro del código: sin servidores ni suscripciones.">
+  <meta name="keywords" content="qr gratis, crear codigo qr gratis, generador de QR, código QR que no caduca, QR permanente, QR sin caducidad, código QR gratis, QR wifi, QR whatsapp">
   <meta name="robots" content="index, follow">
   <meta name="author" content="QR Gratis">
   <link rel="canonical" href="https://qrgratis.net/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_ES">
   <meta property="og:site_name" content="QR Gratis">
-  <meta property="og:title" content="QR Gratis - Generador de Códigos QR en Español">
-  <meta property="og:description" content="Crea códigos QR personalizados gratis: WiFi, WhatsApp, teléfono, email y más. Sin registro.">
+  <meta property="og:title" content="QR Gratis - Generador de Códigos QR que Nunca Caducan">
+  <meta property="og:description" content="Crea códigos QR personalizados gratis que nunca caducan: WiFi, WhatsApp, teléfono, email y más. Sin servidores ni suscripciones.">
   <meta property="og:url" content="https://qrgratis.net/">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="QR Gratis - Generador de Códigos QR Gratis">
-  <meta name="twitter:description" content="Crea códigos QR personalizados gratis: WiFi, WhatsApp, teléfono, email y más.">
+  <meta name="twitter:title" content="QR Gratis - Códigos QR que Nunca Caducan">
+  <meta name="twitter:description" content="Crea códigos QR personalizados gratis que nunca caducan: WiFi, WhatsApp, teléfono, email y más.">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
   <script type="application/ld+json">
@@ -42,7 +42,7 @@
     "operatingSystem": "Web",
     "applicationCategory": "DesignApplication",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "description": "Generador de códigos QR gratuito y personalizable",
+    "description": "Generador de códigos QR gratuito y personalizable que nunca caducan",
     "inLanguage": "es"
   }
   </script>
@@ -75,6 +75,11 @@
         "@type": "Question",
         "name": "¿Qué formatos puedo descargar?",
         "acceptedAnswer": { "@type": "Answer", "text": "Puedes descargar tus QR en PNG, JPG o SVG en alta resolución, ideal para imprimir." }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Los QR caducan o dejan de funcionar?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Los QR que generamos son estáticos: la información va guardada dentro del código y no depende de ningún servidor, así que funcionan para siempre." }
       }
     ]
   }
@@ -100,6 +105,7 @@
   <link rel="stylesheet" href="./css/components/footer.css">
   <link rel="stylesheet" href="./css/components/cookie-consent.css">
   <link rel="stylesheet" href="./css/components/donation.css">
+  <script src="./js/theme.js"></script>
 </head>
 <body>
   <header class="header">
@@ -119,9 +125,15 @@
           <a href="./contact.html" class="nav-link">Contacto</a>
           <a href="#register" class="nav-register">Registrarse</a>
         </nav>
-        <button class="mobile-menu-toggle" id="mobileToggle">
-          <i class="fas fa-bars"></i>
-        </button>
+        <div class="header-right">
+          <button class="theme-toggle" type="button" aria-label="Cambiar tema">
+            <i class="fas fa-moon icon-moon"></i>
+            <i class="fas fa-sun icon-sun"></i>
+          </button>
+          <button class="mobile-menu-toggle" id="mobileToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -129,8 +141,11 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1 class="hero-title">Crea QR <span class="text-gradient">Profesionales</span> en Segundos</h1>
-        <p class="hero-subtitle">Diseña, personaliza y comparte códigos QR con WiFi, email, teléfono y más. Sin registro, sin límites.</p>
+        <div class="hero-badge">
+          <i class="fas fa-check-circle"></i> 100% gratuito · Sin registro · Sin caducidad
+        </div>
+        <h1 class="hero-title">Los QR que <span class="text-gradient">nunca caducan</span></h1>
+        <p class="hero-subtitle">Crea códigos QR gratis, profesionales y personalizados. La información va dentro del código: sin servidores, sin suscripciones, para siempre.</p>
         <div class="hero-buttons">
           <a href="#generator" class="btn btn-primary">Empezar ahora</a>
           <a href="#features" class="btn btn-secondary">Saber más</a>
@@ -164,12 +179,12 @@
 
   <section id="generator" class="generator">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header" data-animate>
         <h2 class="section-title">Generador de QR</h2>
         <p class="section-subtitle">Elige el tipo de QR y personalízalo a tu gusto</p>
       </div>
 
-      <div class="pro-tabs">
+      <div class="pro-tabs" data-animate="fade">
         <button class="pro-tab active" data-tab="general">
           <span class="material-icons-outlined">qr_code</span> General
         </button>
@@ -220,7 +235,7 @@
                   <label for="sizeSlider" class="form-label">Tamaño: <span id="sizeValue">250</span>px</label>
                   <input type="range" id="sizeSlider" min="150" max="500" value="250" step="10" class="form-range">
                 </div>
-                <div class="option-item">
+                <div class="option-item option-item-wide">
                   <label for="errorLevel" class="form-label">Resistencia</label>
                   <select id="errorLevel" class="form-select">
                     <option value="L">Baja (L)</option>
@@ -230,13 +245,51 @@
                   </select>
                 </div>
               </div>
+              <div class="advanced-accordion" id="advancedAccordion">
+                <button type="button" class="advanced-header" id="advancedToggle">
+                  <span><i class="material-icons-outlined">tune</i> Personalización avanzada</span>
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="advanced-body">
+                  <div class="options-grid advanced-grid">
+                <div class="option-item option-item-wide">
+                  <label class="form-label">Forma de puntos</label>
+                  <div class="style-picker" id="dotShapePicker"></div>
+                  <select id="dotShape" class="form-select" style="display:none;">
+                    <option value="square">Cuadrados</option>
+                    <option value="dots">Puntos</option>
+                    <option value="rounded" selected>Redondeados</option>
+                    <option value="classy">Elegante</option>
+                    <option value="classy-rounded">Elegante redondeado</option>
+                    <option value="extra-rounded">Extra redondeado</option>
+                  </select>
+                </div>
+                <div class="option-item option-item-wide">
+                  <label class="form-label">Forma del ojo</label>
+                  <div class="style-picker" id="eyeShapePicker"></div>
+                  <select id="eyeShape" class="form-select" style="display:none;">
+                    <option value="square">Cuadrado</option>
+                    <option value="dot" selected>Redondeado</option>
+                  </select>
+                </div>
+                <div class="option-item option-item-wide">
+                  <label class="form-label">Marco del ojo</label>
+                  <div class="style-picker" id="eyeFrameShapePicker"></div>
+                  <select id="eyeFrameShape" class="form-select" style="display:none;">
+                    <option value="square" selected>Cuadrado</option>
+                    <option value="dot">Punto</option>
+                    <option value="extra-rounded">Extra redondeado</option>
+                  </select>
+                </div>
+                  </div>
+                </div>
+              </div>
               <div class="form-group">
                 <label for="logoInput" class="form-label">Logo (opcional)</label>
                 <input type="file" id="logoInput" accept="image/*" class="form-input-file">
               </div>
               <div class="form-buttons">
                 <button id="generateBtn" class="btn btn-primary"><span class="material-icons-outlined">qr_code</span> Generar QR</button>
-                <button id="downloadBtn" class="btn btn-success" style="display:none;"><span class="material-icons-outlined">download</span> Descargar</button>
               </div>
               <div class="history-section" id="historySection" style="display:none;">
                 <h3><span class="material-icons-outlined">history</span> Últimos QR</h3>
@@ -246,8 +299,23 @@
             </div>
           </div>
           <div class="qr-preview-container">
-            <div id="qr-container" class="qr-preview"></div>
-            <p class="qr-placeholder-text">Tu código QR aparecerá aquí</p>
+            <div class="qr-preview-frame">
+              <div class="qr-preview-header">
+                <span class="qr-preview-title"><span class="material-icons-outlined">qr_code</span> Vista previa</span>
+                <span class="qr-preview-live"><span class="live-dot"></span> En vivo</span>
+              </div>
+              <div class="qr-preview-body has-qr" id="body-general">
+                <div class="qr-preview-empty">
+                  <span class="material-icons-outlined">qr_code_2</span>
+                  <p>Tu código QR aparecerá aquí</p>
+                </div>
+                <div id="qr-container" class="qr-preview"></div>
+              </div>
+              <div class="qr-preview-footer">
+                <p class="qr-placeholder-text">Genera tu QR y descárgalo en alta resolución</p>
+                <button id="downloadBtn" class="btn btn-success" style="display:none;"><span class="material-icons-outlined">download</span> Descargar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -260,12 +328,25 @@
               <div class="form-group"><label class="form-label">Contraseña</label><input type="text" id="wifiPassword" class="form-input" placeholder="Clave"></div>
               <div class="form-group"><label class="form-label">Seguridad</label><select id="wifiSecurity" class="form-select"><option value="WPA">WPA/WPA2</option><option value="WEP">WEP</option><option value="nopass">Sin seguridad</option></select></div>
               <button onclick="generarQRWifi()" class="btn btn-primary"><span class="material-icons-outlined">wifi</span> Generar QR WiFi</button>
-              <button id="downloadWifiBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
             </div>
           </div>
           <div class="qr-preview-container">
-            <div id="qr-wifi-container" class="qr-preview"></div>
-            <p class="qr-placeholder-text">Tu QR WiFi aparecerá aquí</p>
+            <div class="qr-preview-frame">
+              <div class="qr-preview-header">
+                <span class="qr-preview-title"><span class="material-icons-outlined">qr_code</span> Vista previa</span>
+                <span class="qr-preview-live"><span class="live-dot"></span> En vivo</span>
+              </div>
+              <div class="qr-preview-body" id="body-wifi">
+                <div class="qr-preview-empty">
+                  <span class="material-icons-outlined">wifi</span>
+                  <p>Tu QR WiFi aparecerá aquí</p>
+                </div>
+                <div id="qr-wifi-container" class="qr-preview"></div>
+              </div>
+              <div class="qr-preview-footer">
+                <button id="downloadWifiBtn" class="btn btn-success" style="display:none;"><span class="material-icons-outlined">download</span> Descargar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -278,12 +359,25 @@
               <div class="form-group"><label class="form-label">Asunto</label><input type="text" id="emailSubject" class="form-input" placeholder="Asunto"></div>
               <div class="form-group"><label class="form-label">Mensaje</label><textarea id="emailBody" rows="3" class="form-input" placeholder="Cuerpo del correo"></textarea></div>
               <button onclick="generarQREmail()" class="btn btn-primary"><span class="material-icons-outlined">email</span> Generar QR Email</button>
-              <button id="downloadEmailBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
             </div>
           </div>
           <div class="qr-preview-container">
-            <div id="qr-email-container" class="qr-preview"></div>
-            <p class="qr-placeholder-text">Tu QR Email aparecerá aquí</p>
+            <div class="qr-preview-frame">
+              <div class="qr-preview-header">
+                <span class="qr-preview-title"><span class="material-icons-outlined">qr_code</span> Vista previa</span>
+                <span class="qr-preview-live"><span class="live-dot"></span> En vivo</span>
+              </div>
+              <div class="qr-preview-body" id="body-email">
+                <div class="qr-preview-empty">
+                  <span class="material-icons-outlined">email</span>
+                  <p>Tu QR Email aparecerá aquí</p>
+                </div>
+                <div id="qr-email-container" class="qr-preview"></div>
+              </div>
+              <div class="qr-preview-footer">
+                <button id="downloadEmailBtn" class="btn btn-success" style="display:none;"><span class="material-icons-outlined">download</span> Descargar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -294,12 +388,25 @@
             <div class="generator-form">
               <div class="form-group"><label class="form-label">Número</label><input type="tel" id="phoneNumber" class="form-input" placeholder="+503 1234 5678"></div>
               <button onclick="generarQRPhone()" class="btn btn-primary"><span class="material-icons-outlined">phone</span> Generar QR Teléfono</button>
-              <button id="downloadPhoneBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
             </div>
           </div>
           <div class="qr-preview-container">
-            <div id="qr-phone-container" class="qr-preview"></div>
-            <p class="qr-placeholder-text">Tu QR de teléfono aparecerá aquí</p>
+            <div class="qr-preview-frame">
+              <div class="qr-preview-header">
+                <span class="qr-preview-title"><span class="material-icons-outlined">qr_code</span> Vista previa</span>
+                <span class="qr-preview-live"><span class="live-dot"></span> En vivo</span>
+              </div>
+              <div class="qr-preview-body" id="body-phone">
+                <div class="qr-preview-empty">
+                  <span class="material-icons-outlined">phone</span>
+                  <p>Tu QR de teléfono aparecerá aquí</p>
+                </div>
+                <div id="qr-phone-container" class="qr-preview"></div>
+              </div>
+              <div class="qr-preview-footer">
+                <button id="downloadPhoneBtn" class="btn btn-success" style="display:none;"><span class="material-icons-outlined">download</span> Descargar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -311,12 +418,25 @@
               <div class="form-group"><label class="form-label">Número de WhatsApp</label><input type="tel" id="waNumber" class="form-input" placeholder="+503 1234 5678"></div>
               <div class="form-group"><label class="form-label">Mensaje (opcional)</label><textarea id="waMessage" rows="2" class="form-input" placeholder="Hola, me gustaría más información"></textarea></div>
               <button onclick="generarQRWhatsApp()" class="btn btn-primary"><span class="material-icons-outlined">chat</span> Generar QR WhatsApp</button>
-              <button id="downloadWhatsAppBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
             </div>
           </div>
           <div class="qr-preview-container">
-            <div id="qr-whatsapp-container" class="qr-preview"></div>
-            <p class="qr-placeholder-text">Tu QR de WhatsApp aparecerá aquí</p>
+            <div class="qr-preview-frame">
+              <div class="qr-preview-header">
+                <span class="qr-preview-title"><span class="material-icons-outlined">qr_code</span> Vista previa</span>
+                <span class="qr-preview-live"><span class="live-dot"></span> En vivo</span>
+              </div>
+              <div class="qr-preview-body" id="body-whatsapp">
+                <div class="qr-preview-empty">
+                  <span class="material-icons-outlined">chat</span>
+                  <p>Tu QR de WhatsApp aparecerá aquí</p>
+                </div>
+                <div id="qr-whatsapp-container" class="qr-preview"></div>
+              </div>
+              <div class="qr-preview-footer">
+                <button id="downloadWhatsAppBtn" class="btn btn-success" style="display:none;"><span class="material-icons-outlined">download</span> Descargar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -331,12 +451,25 @@
               <div class="form-group"><label class="form-label">Empresa (opcional)</label><input type="text" id="vcOrg" class="form-input" placeholder="Mi Empresa"></div>
               <div class="form-group"><label class="form-label">Página web (opcional)</label><input type="text" id="vcUrl" class="form-input" placeholder="https://tusitio.com"></div>
               <button onclick="generarQRVcard()" class="btn btn-primary"><span class="material-icons-outlined">contact_page</span> Generar QR Contacto</button>
-              <button id="downloadVcardBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
             </div>
           </div>
           <div class="qr-preview-container">
-            <div id="qr-vcard-container" class="qr-preview"></div>
-            <p class="qr-placeholder-text">Tu QR de contacto aparecerá aquí</p>
+            <div class="qr-preview-frame">
+              <div class="qr-preview-header">
+                <span class="qr-preview-title"><span class="material-icons-outlined">qr_code</span> Vista previa</span>
+                <span class="qr-preview-live"><span class="live-dot"></span> En vivo</span>
+              </div>
+              <div class="qr-preview-body" id="body-vcard">
+                <div class="qr-preview-empty">
+                  <span class="material-icons-outlined">contact_page</span>
+                  <p>Tu QR de contacto aparecerá aquí</p>
+                </div>
+                <div id="qr-vcard-container" class="qr-preview"></div>
+              </div>
+              <div class="qr-preview-footer">
+                <button id="downloadVcardBtn" class="btn btn-success" style="display:none;"><span class="material-icons-outlined">download</span> Descargar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -348,12 +481,25 @@
               <div class="form-group"><label class="form-label">Número</label><input type="tel" id="smsNumber" class="form-input" placeholder="+503 1234 5678"></div>
               <div class="form-group"><label class="form-label">Mensaje (opcional)</label><textarea id="smsMessage" rows="2" class="form-input" placeholder="Hola, te escribo desde tu código QR"></textarea></div>
               <button onclick="generarQRSms()" class="btn btn-primary"><span class="material-icons-outlined">sms</span> Generar QR SMS</button>
-              <button id="downloadSmsBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
             </div>
           </div>
           <div class="qr-preview-container">
-            <div id="qr-sms-container" class="qr-preview"></div>
-            <p class="qr-placeholder-text">Tu QR de SMS aparecerá aquí</p>
+            <div class="qr-preview-frame">
+              <div class="qr-preview-header">
+                <span class="qr-preview-title"><span class="material-icons-outlined">qr_code</span> Vista previa</span>
+                <span class="qr-preview-live"><span class="live-dot"></span> En vivo</span>
+              </div>
+              <div class="qr-preview-body" id="body-sms">
+                <div class="qr-preview-empty">
+                  <span class="material-icons-outlined">sms</span>
+                  <p>Tu QR de SMS aparecerá aquí</p>
+                </div>
+                <div id="qr-sms-container" class="qr-preview"></div>
+              </div>
+              <div class="qr-preview-footer">
+                <button id="downloadSmsBtn" class="btn btn-success" style="display:none;"><span class="material-icons-outlined">download</span> Descargar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -365,12 +511,25 @@
               <div class="form-group"><label class="form-label">Dirección o lugar</label><textarea id="locAddress" rows="3" class="form-input" placeholder="Calle El Progreso 123, San Salvador, El Salvador"></textarea></div>
               <p class="form-hint" style="color:var(--text-muted);font-size:0.8rem;margin:-0.5rem 0 1rem;">El teléfono abre Google Maps con esta dirección.</p>
               <button onclick="generarQRLocation()" class="btn btn-primary"><span class="material-icons-outlined">location_on</span> Generar QR Ubicación</button>
-              <button id="downloadLocationBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
             </div>
           </div>
           <div class="qr-preview-container">
-            <div id="qr-location-container" class="qr-preview"></div>
-            <p class="qr-placeholder-text">Tu QR de ubicación aparecerá aquí</p>
+            <div class="qr-preview-frame">
+              <div class="qr-preview-header">
+                <span class="qr-preview-title"><span class="material-icons-outlined">qr_code</span> Vista previa</span>
+                <span class="qr-preview-live"><span class="live-dot"></span> En vivo</span>
+              </div>
+              <div class="qr-preview-body" id="body-location">
+                <div class="qr-preview-empty">
+                  <span class="material-icons-outlined">location_on</span>
+                  <p>Tu QR de ubicación aparecerá aquí</p>
+                </div>
+                <div id="qr-location-container" class="qr-preview"></div>
+              </div>
+              <div class="qr-preview-footer">
+                <button id="downloadLocationBtn" class="btn btn-success" style="display:none;"><span class="material-icons-outlined">download</span> Descargar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -385,12 +544,25 @@
               <div class="form-group"><label class="form-label">Fecha de inicio</label><input type="datetime-local" id="evStart" class="form-input"></div>
               <div class="form-group"><label class="form-label">Fecha de fin (opcional)</label><input type="datetime-local" id="evEnd" class="form-input"></div>
               <button onclick="generarQREvent()" class="btn btn-primary"><span class="material-icons-outlined">event</span> Generar QR Evento</button>
-              <button id="downloadEventBtn" class="btn btn-success" style="display:none; margin-top:0.5rem;"><span class="material-icons-outlined">download</span> Descargar</button>
             </div>
           </div>
           <div class="qr-preview-container">
-            <div id="qr-event-container" class="qr-preview"></div>
-            <p class="qr-placeholder-text">Tu QR de evento aparecerá aquí</p>
+            <div class="qr-preview-frame">
+              <div class="qr-preview-header">
+                <span class="qr-preview-title"><span class="material-icons-outlined">qr_code</span> Vista previa</span>
+                <span class="qr-preview-live"><span class="live-dot"></span> En vivo</span>
+              </div>
+              <div class="qr-preview-body" id="body-event">
+                <div class="qr-preview-empty">
+                  <span class="material-icons-outlined">event</span>
+                  <p>Tu QR de evento aparecerá aquí</p>
+                </div>
+                <div id="qr-event-container" class="qr-preview"></div>
+              </div>
+              <div class="qr-preview-footer">
+                <button id="downloadEventBtn" class="btn btn-success" style="display:none;"><span class="material-icons-outlined">download</span> Descargar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -410,12 +582,12 @@
     <div class="container">
       <div class="register-content">
         <div class="register-info">
-          <div class="section-header">
+          <div class="section-header" data-animate>
             <h2 class="section-title">Crea tu <span class="text-gradient">cuenta gratis</span></h2>
             <p class="section-subtitle">Guarda tus QR, edítalos cuando quieras y llévalos siempre contigo.</p>
           </div>
         </div>
-        <div class="register-card">
+        <div class="register-card" data-animate>
           <div class="register-icon">
             <i class="fas fa-user-plus"></i>
           </div>
@@ -444,27 +616,32 @@
 
   <section id="features" class="features">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header" data-animate>
         <h2 class="section-title">Características</h2>
         <p class="section-subtitle">Todo lo que necesitas para crear códigos QR profesionales</p>
       </div>
       <div class="features-grid">
-        <div class="feature-card">
+        <div class="feature-card" data-animate>
+          <div class="feature-icon"><i class="fas fa-infinity"></i></div>
+          <h3 class="feature-title">Nunca caducan</h3>
+          <p class="feature-description">Generamos QR estáticos: la información va dentro del código. Funcionan para siempre, sin depender de servidores ni suscripciones.</p>
+        </div>
+        <div class="feature-card" data-animate>
           <div class="feature-icon"><i class="fas fa-palette"></i></div>
           <h3 class="feature-title">Personalización</h3>
-          <p class="feature-description">Elige colores, estilos y añade tu logo para que tu QR sea único.</p>
+          <p class="feature-description">Elige colores, formas de puntos, ojos y marco, y añade tu logo para que tu QR sea único.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate>
           <div class="feature-icon"><i class="fas fa-download"></i></div>
           <h3 class="feature-title">Descarga PNG</h3>
           <p class="feature-description">Alta calidad lista para imprimir en tus tarjetas o flyers.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate>
           <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
           <h3 class="feature-title">Privacidad</h3>
           <p class="feature-description">No almacenamos tus datos. Todo se procesa en tu navegador.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate>
           <div class="feature-icon"><i class="fas fa-infinity"></i></div>
           <h3 class="feature-title">Ilimitado</h3>
           <p class="feature-description">Genera tantos códigos QR como necesites, sin límites.</p>
@@ -475,12 +652,12 @@
 
   <section id="testimonials" class="testimonials">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header" data-animate>
         <h2 class="section-title">Testimonios</h2>
         <p class="section-subtitle">Miles de personas ya están usando QR Gratis</p>
       </div>
       <div class="testimonials-grid">
-        <div class="testimonial-card">
+        <div class="testimonial-card" data-animate>
           <div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
           <p class="testimonial-text">"Increíble herramienta, genero QR para WiFi de mis clientes al instante."</p>
           <div class="testimonial-author">
@@ -488,7 +665,7 @@
             <div class="author-info"><h4 class="author-name">María González</h4><p class="author-role">Marketing Manager</p></div>
           </div>
         </div>
-        <div class="testimonial-card">
+        <div class="testimonial-card" data-animate>
           <div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
           <p class="testimonial-text">"La personalización con logo hace que mis QR luzcan profesionales."</p>
           <div class="testimonial-author">
@@ -496,7 +673,7 @@
             <div class="author-info"><h4 class="author-name">Carlos Ruiz</h4><p class="author-role">Diseñador Freelance</p></div>
           </div>
         </div>
-        <div class="testimonial-card">
+        <div class="testimonial-card" data-animate>
           <div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
           <p class="testimonial-text">"Lo uso a diario para mis campañas. Rápido y confiable."</p>
           <div class="testimonial-author">
@@ -510,7 +687,7 @@
 
   <section id="faq" class="faq">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header" data-animate>
         <h2 class="section-title">Preguntas Frecuentes</h2>
         <p class="section-subtitle">Respuestas a las dudas más comunes</p>
       </div>
@@ -536,6 +713,10 @@
           <div class="faq-answer"><p>Puedes descargar tus QR en alta resolución en formato PNG, JPG o SVG (hasta 4096 px), ideal para imprimir en tarjetas, flyers y materiales profesionales.</p></div>
         </div>
         <div class="faq-item">
+          <div class="faq-question"><h3>¿Los QR caducan o dejan de funcionar?</h3><i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer"><p>No. Los QR que generas aquí son estáticos: la información (URL, texto, WiFi, etc.) va guardada directamente dentro del código. No dependen de ningún servidor ni servicio externo, así que funcionan para siempre. Lo que sí puede dejar de funcionar es un QR dinámico de otros servicios, que depende de que su servidor siga activo.</p></div>
+        </div>
+        <div class="faq-item">
           <div class="faq-question"><h3>¿Cuántos tipos de QR ofrece?</h3><i class="fas fa-chevron-down"></i></div>
           <div class="faq-answer"><p>Actualmente puedes crear 9 tipos: URL/texto, WiFi, email, teléfono, WhatsApp, contacto vCard, SMS, ubicación y eventos. Todo en una misma y sencilla interfaz.</p></div>
         </div>
@@ -545,7 +726,7 @@
 
   <section class="cta">
     <div class="container">
-      <h2 class="cta-title"><span class="material-icons-outlined">rocket_launch</span> ¿Quieres más? Próximamente Plan Pro</h2>
+      <h2 class="cta-title" data-animate="fade"><span class="material-icons-outlined">rocket_launch</span> ¿Quieres más? Próximamente Plan Pro</h2>
       <p class="cta-subtitle">Sin anuncios, con estadísticas y almacenamiento en la nube. Déjanos tu email y te avisaremos.</p>
       <form id="proForm" class="cta-form" action="https://formspree.io/f/xnpajpdr" method="POST">
         <input type="email" name="email" placeholder="tu@email.com" required class="cta-input">
@@ -557,7 +738,7 @@
 
   <section id="donate" class="donation">
     <div class="container">
-      <div class="donation-card">
+      <div class="donation-card" data-animate>
         <div class="donation-icon"><i class="fab fa-bitcoin"></i></div>
         <h2 class="donation-title">Apoya el proyecto 💛</h2>
         <p class="donation-desc">QR Gratis es 100% gratuito y sin límites. Si te resulta útil y quieres ayudarme a mantenerlo en línea, puedes hacer una donación con tu Chivo Wallet (Bitcoin). ¡Gracias por tu apoyo!</p>
