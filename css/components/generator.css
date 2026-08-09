@@ -571,6 +571,30 @@
   width: 100%;
 }
 
+.download-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.download-option {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.download-option .form-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.dl-select {
+  padding: 0.55rem 0.7rem;
+  font-size: 0.85rem;
+}
+
 .pro-panel {
   display: none;
 }

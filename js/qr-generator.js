@@ -41,9 +41,7 @@
 
         // Botones generales
         document.getElementById("generateBtn")?.addEventListener("click", generarQR);
-        document.getElementById("downloadBtn")?.addEventListener("click", () => {
-            qrCode.download({ name: "qr_general", extension: "png" });
-        });
+        document.getElementById("downloadBtn")?.addEventListener("click", () => descargarQR(qrCode, "qr_general", "general"));
 
         // Historial
         renderizarHistorial();
@@ -82,14 +80,14 @@
         });
 
         // Botones de descarga Pro
-        document.getElementById("downloadWifiBtn")?.addEventListener("click", () => qrWifi.download({ name: "qr_wifi", extension: "png" }));
-        document.getElementById("downloadEmailBtn")?.addEventListener("click", () => qrEmail.download({ name: "qr_email", extension: "png" }));
-        document.getElementById("downloadPhoneBtn")?.addEventListener("click", () => qrPhone.download({ name: "qr_phone", extension: "png" }));
-        document.getElementById("downloadWhatsAppBtn")?.addEventListener("click", () => qrWhatsApp.download({ name: "qr_whatsapp", extension: "png" }));
-        document.getElementById("downloadVcardBtn")?.addEventListener("click", () => qrVcard.download({ name: "qr_vcard", extension: "png" }));
-        document.getElementById("downloadSmsBtn")?.addEventListener("click", () => qrSms.download({ name: "qr_sms", extension: "png" }));
-        document.getElementById("downloadLocationBtn")?.addEventListener("click", () => qrLocation.download({ name: "qr_ubicacion", extension: "png" }));
-        document.getElementById("downloadEventBtn")?.addEventListener("click", () => qrEvent.download({ name: "qr_evento", extension: "png" }));
+        document.getElementById("downloadWifiBtn")?.addEventListener("click", () => descargarQR(qrWifi, "qr_wifi", "wifi"));
+        document.getElementById("downloadEmailBtn")?.addEventListener("click", () => descargarQR(qrEmail, "qr_email", "email"));
+        document.getElementById("downloadPhoneBtn")?.addEventListener("click", () => descargarQR(qrPhone, "qr_phone", "phone"));
+        document.getElementById("downloadWhatsAppBtn")?.addEventListener("click", () => descargarQR(qrWhatsApp, "qr_whatsapp", "whatsapp"));
+        document.getElementById("downloadVcardBtn")?.addEventListener("click", () => descargarQR(qrVcard, "qr_vcard", "vcard"));
+        document.getElementById("downloadSmsBtn")?.addEventListener("click", () => descargarQR(qrSms, "qr_sms", "sms"));
+        document.getElementById("downloadLocationBtn")?.addEventListener("click", () => descargarQR(qrLocation, "qr_ubicacion", "location"));
+        document.getElementById("downloadEventBtn")?.addEventListener("click", () => descargarQR(qrEvent, "qr_evento", "event"));
 
         // Envío de formularios a Formspree (registro y Plan Pro)
         const bindFormspree = (formId, msgId) => {
@@ -206,6 +204,38 @@
         if (body) body.classList.add('has-qr');
         const btn = document.getElementById(btnId);
         if (btn) btn.style.display = 'inline-flex';
+    }
+
+    async function descargarQR(qrInstancia, nombreBase, sufijo) {
+        if (!qrInstancia || !qrInstancia._options || !qrInstancia._options.data) {
+            return alert("Primero genera un código QR para descargarlo.");
+        }
+        const formato = document.getElementById(`fmt-${sufijo}`)?.value || "png";
+        const resolucion = parseInt(document.getElementById(`size-${sufijo}`)?.value) || 2048;
+
+        if (formato === "svg") {
+            // SVG es vectorial: la resolución no aplica, se descarga tal cual
+            return qrInstancia.download({ name: nombreBase, extension: "svg" });
+        }
+
+        // Para PNG/JPG creamos una instancia temporal a la resolución elegida
+        const opciones = Object.assign({}, qrInstancia._options);
+        opciones.width = resolucion;
+        opciones.height = resolucion;
+        try {
+            const temporal = new QRCodeStyling(opciones);
+            const blob = await temporal.getRawData(formato);
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `${nombreBase}.${formato === "jpeg" ? "jpg" : formato}`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(() => URL.revokeObjectURL(link.href), 3000);
+        } catch (err) {
+            console.error("Error al generar la descarga:", err);
+            alert("Ocurrió un error al generar la descarga. Inténtalo de nuevo.");
+        }
     }
 
     function generarQR() {
