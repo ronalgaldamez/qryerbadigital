@@ -21,6 +21,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://qrgratis.net/blog/qr-whatsapp-pedidos.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://qrgratis.net/blog/qr-wifi-eventos.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
