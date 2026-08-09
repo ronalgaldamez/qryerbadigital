@@ -199,11 +199,13 @@
         });
     }
 
-    function mostrarQR(bodyId, btnId) {
+    function mostrarQR(bodyId, btnId, shareBtnId) {
         const body = document.getElementById(bodyId);
         if (body) body.classList.add('has-qr');
         const btn = document.getElementById(btnId);
         if (btn) btn.style.display = 'inline-flex';
+        const shareBtn = document.getElementById(shareBtnId);
+        if (shareBtn) shareBtn.style.display = 'inline-flex';
     }
 
     async function descargarQR(qrInstancia, nombreBase, sufijo) {
@@ -238,11 +240,87 @@
         }
     }
 
+    // Menús de compartir: abrir/cerrar con un clic fuera
+    document.addEventListener('click', (e) => {
+        document.querySelectorAll('.share-menu.open').forEach(menu => {
+            if (!menu.contains(e.target) && !menu.previousElementSibling?.contains(e.target)) {
+                menu.classList.remove('open');
+            }
+        });
+    });
+
+    document.querySelectorAll('.share-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const menu = btn.nextElementSibling;
+            if (menu) menu.classList.toggle('open');
+        });
+    });
+
+    document.querySelectorAll('.share-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const accion = item.dataset.share;
+            const nombre = item.dataset.name;
+            item.closest('.share-menu')?.classList.remove('open');
+            const qr = { general: qrCode, wifi: qrWifi, email: qrEmail, phone: qrPhone, whatsapp: qrWhatsApp, vcard: qrVcard, sms: qrSms, location: qrLocation, event: qrEvent }[nombre];
+            if (qr) compartirQR(qr, accion);
+        });
+    });
+
+    async function compartirQR(qrInstancia, accion) {
+        const data = qrInstancia?._options?.data;
+        if (!data) return alert("Primero genera un código QR para compartirlo.");
+
+        // Imagen PNG del QR a 1024px para compartir
+        const opciones = Object.assign({}, qrInstancia._options);
+        opciones.width = 1024;
+        opciones.height = 1024;
+        let blob = null;
+        try {
+            const temporal = new QRCodeStyling(opciones);
+            blob = await temporal.getRawData("png");
+        } catch (err) {
+            console.error("Error al generar imagen para compartir:", err);
+        }
+
+        if (accion === "copy") {
+            try {
+                await navigator.clipboard.writeText(data);
+                return alert("Enlace copiado al portapapeles.");
+            } catch (err) {
+                return alert("No se pudo copiar. Cópialo manualmente: " + data);
+            }
+        }
+
+        if (accion === "whatsapp") {
+            if (blob && navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], "qr.png", { type: "image/png" })] })) {
+                try {
+                    await navigator.share({
+                        files: [new File([blob], "qr.png", { type: "image/png" })],
+                        title: "Código QR",
+                        text: data
+                    });
+                    return;
+                } catch (err) { /* si falla o cancela, cae al fallback */ }
+            }
+            const mensaje = encodeURIComponent(`Mira este código QR: ${data} — creado gratis en https://qrgratis.net`);
+            window.open(`https://wa.me/?text=${mensaje}`, "_blank");
+            return;
+        }
+
+        if (accion === "facebook") {
+            const url = /^https?:\/\//i.test(data) ? data : "https://qrgratis.net";
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, "_blank");
+            return;
+        }
+    }
+
     function generarQR() {
         const url = document.getElementById("urlInput")?.value.trim();
         if (!url) return alert("Ingresa una URL o texto.");
         qrCode.update({ data: url });
-        mostrarQR("body-general", "downloadBtn");
+        mostrarQR("body-general", "downloadBtn", "shareBtn");
 
         const entry = {
             url,
@@ -286,7 +364,7 @@
                 sincronizarPickers();
                 actualizarEstilo();
                 qrCode.update({ data: item.url, width: parseInt(item.size)||250, height: parseInt(item.size)||250, qrOptions: { errorCorrectionLevel: item.ec || 'M' } });
-                mostrarQR("body-general", "downloadBtn");
+                mostrarQR("body-general", "downloadBtn", "shareBtn");
             });
         });
     }
@@ -310,7 +388,7 @@
         const sec = document.getElementById("wifiSecurity")?.value;
         if (!ssid) return alert("Ingresa el SSID.");
         qrWifi.update({ data: `WIFI:T:${sec};S:${ssid};P:${pass};;` });
-        mostrarQR("body-wifi", "downloadWifiBtn");
+        mostrarQR("body-wifi", "downloadWifiBtn", "shareWifiBtn");
     };
 
     window.generarQREmail = function() {
@@ -324,14 +402,14 @@
         if (body) params.push(`body=${encodeURIComponent(body)}`);
         if (params.length) mailto += '?' + params.join('&');
         qrEmail.update({ data: mailto });
-        mostrarQR("body-email", "downloadEmailBtn");
+        mostrarQR("body-email", "downloadEmailBtn", "shareEmailBtn");
     };
 
     window.generarQRPhone = function() {
         const phone = document.getElementById("phoneNumber")?.value.trim();
         if (!phone) return alert("Ingresa el número.");
         qrPhone.update({ data: `tel:${phone}` });
-        mostrarQR("body-phone", "downloadPhoneBtn");
+        mostrarQR("body-phone", "downloadPhoneBtn", "sharePhoneBtn");
     };
 
     window.generarQRWhatsApp = function() {
@@ -343,7 +421,7 @@
         let data = `https://wa.me/${phone}`;
         if (msg) data += `?text=${encodeURIComponent(msg)}`;
         qrWhatsApp.update({ data });
-        mostrarQR("body-whatsapp", "downloadWhatsAppBtn");
+        mostrarQR("body-whatsapp", "downloadWhatsAppBtn", "shareWhatsAppBtn");
     };
 
     window.generarQRVcard = function() {
@@ -362,7 +440,7 @@
         if (url) vcf += `URL:${url}\n`;
         vcf += "END:VCARD";
         qrVcard.update({ data: vcf });
-        mostrarQR("body-vcard", "downloadVcardBtn");
+        mostrarQR("body-vcard", "downloadVcardBtn", "shareVcardBtn");
     };
 
     window.generarQRSms = function() {
@@ -372,14 +450,14 @@
         let data = `SMSTO:${phone}`;
         if (msg) data += `:${msg}`;
         qrSms.update({ data });
-        mostrarQR("body-sms", "downloadSmsBtn");
+        mostrarQR("body-sms", "downloadSmsBtn", "shareSmsBtn");
     };
 
     window.generarQRLocation = function() {
         const address = document.getElementById("locAddress")?.value.trim();
         if (!address) return alert("Ingresa una dirección.");
         qrLocation.update({ data: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}` });
-        mostrarQR("body-location", "downloadLocationBtn");
+        mostrarQR("body-location", "downloadLocationBtn", "shareLocationBtn");
     };
 
     window.generarQREvent = function() {
@@ -399,6 +477,6 @@
         if (end) vevent += `DTEND:${toIcsDate(end)}\n`;
         vevent += "END:VEVENT\nEND:VCALENDAR";
         qrEvent.update({ data: vevent });
-        mostrarQR("body-event", "downloadEventBtn");
+        mostrarQR("body-event", "downloadEventBtn", "shareEventBtn");
     };
 })();
