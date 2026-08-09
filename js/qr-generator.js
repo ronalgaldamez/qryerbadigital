@@ -120,7 +120,76 @@
         };
         bindFormspree("registerForm", "registerMsg");
         bindFormspree("proForm", "proMsg");
+
+        // Generación en lote
+        document.getElementById("batchGenerateBtn")?.addEventListener("click", generarLote);
     });
+
+    async function generarLote() {
+        const textarea = document.getElementById("batchUrls");
+        const msg = document.getElementById("batchMsg");
+        const progress = document.getElementById("batchProgress");
+        const fill = document.getElementById("batchProgressFill");
+        const textProgress = document.getElementById("batchProgressText");
+        const btn = document.getElementById("batchGenerateBtn");
+        const color = document.getElementById("batchColor")?.value || "#6c5ce7";
+        const size = parseInt(document.getElementById("batchSize")?.value) || 1024;
+
+        if (!textarea || !msg) return;
+        const lineas = textarea.value.split("\n").map(s => s.trim()).filter(Boolean);
+        if (lineas.length === 0) {
+            return alert("Escribe al menos una URL o texto por línea.");
+        }
+
+        if (typeof JSZip === "undefined") {
+            return alert("Error al cargar la librería para el ZIP. Recarga la página.");
+        }
+
+        const zip = new JSZip();
+        const nombreSanitizado = (url) => {
+            let n = url.replace(/^https?:\/\//i, "").replace(/[^\w\-]+/g, "_").replace(/_+/g, "_");
+            if (n.length > 40) n = n.substring(0, 40);
+            if (!n) n = "qr";
+            return `${n}.png`;
+        };
+
+        if (msg) msg.textContent = `Generando ${lineas.length} QR...`;
+        if (btn) btn.disabled = true;
+        if (progress) progress.style.display = "block";
+
+        try {
+            for (let i = 0; i < lineas.length; i++) {
+                const qr = new QRCodeStyling({
+                    width: size, height: size, type: "canvas",
+                    data: lineas[i],
+                    dotsOptions: { color, type: "rounded" },
+                    backgroundOptions: { color: "#ffffff" }
+                });
+                const blob = await qr.getRawData("png");
+                zip.file(nombreSanitizado(lineas[i]), blob);
+                if (fill) fill.style.width = Math.round(((i + 1) / lineas.length) * 100) + "%";
+                if (textProgress) textProgress.textContent = `${i + 1} de ${lineas.length}`;
+            }
+
+            const zipBlob = await zip.generateAsync({ type: "blob" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(zipBlob);
+            link.download = "codigos-qr.zip";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(() => URL.revokeObjectURL(link.href), 3000);
+
+            if (msg) { msg.textContent = `¡Listo! ${lineas.length} QR descargados en codigos-qr.zip`; msg.style.color = "#059669"; }
+        } catch (err) {
+            console.error("Error en generación en lote:", err);
+            if (msg) { msg.textContent = "Ocurrió un error al generar el ZIP."; msg.style.color = "#dc2626"; }
+        } finally {
+            if (btn) btn.disabled = false;
+            if (progress) progress.style.display = "none";
+            if (fill) fill.style.width = "0%";
+        }
+    }
 
     function construirPickers() {
         const definiciones = [

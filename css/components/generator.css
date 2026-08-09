@@ -657,6 +657,36 @@
   color: var(--accent);
 }
 
+.batch-msg {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  width: 100%;
+}
+
+.batch-progress {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.batch-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--border-light);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.batch-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
 .pro-panel {
   display: none;
 }

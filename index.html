@@ -213,6 +213,9 @@
         <button class="pro-tab" data-tab="event">
           <span class="material-icons-outlined">event</span> Evento
         </button>
+        <button class="pro-tab" data-tab="batch">
+          <span class="material-icons-outlined">grid_view</span> Lote
+        </button>
       </div>
 
       <div class="pro-panel active" id="panel-general">
@@ -801,6 +804,58 @@
           </div>
         </div>
       </div>
+
+      <div class="pro-panel" id="panel-batch">
+        <div class="generator-content">
+          <div class="generator-form-container">
+            <div class="generator-form">
+              <div class="form-group">
+                <label for="batchUrls" class="form-label">URLs o textos (uno por línea)</label>
+                <textarea id="batchUrls" rows="8" class="form-input" placeholder="https://tusitio.com&#10;https://tusitio.com/pagina2&#10;https://tusitio.com/pagina3"></textarea>
+                <p class="form-hint" style="color:var(--text-muted);font-size:0.8rem;margin-top:0.3rem;">Escribe una URL o texto por línea. Se generará un QR por cada uno.</p>
+              </div>
+              <div class="options-grid">
+                <div class="option-item">
+                  <label for="batchColor" class="form-label">Color QR</label>
+                  <input type="color" id="batchColor" value="#6c5ce7" class="form-color">
+                </div>
+                <div class="option-item">
+                  <label for="batchSize" class="form-label">Resolución</label>
+                  <select id="batchSize" class="form-select">
+                    <option value="512">512 px</option>
+                    <option value="1024" selected>1024 px</option>
+                    <option value="2048">2048 px</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-buttons">
+                <button id="batchGenerateBtn" class="btn btn-primary"><span class="material-icons-outlined">grid_view</span> Generar y descargar ZIP</button>
+                <p id="batchMsg" class="batch-msg"></p>
+              </div>
+            </div>
+          </div>
+          <div class="qr-preview-container">
+            <div class="qr-preview-frame">
+              <div class="qr-preview-header">
+                <span class="qr-preview-title"><span class="material-icons-outlined">grid_view</span> Generación en lote</span>
+              </div>
+              <div class="qr-preview-body" style="min-height:auto;padding:1.5rem;flex-direction:column;gap:0.5rem;">
+                <div class="qr-preview-empty" style="position:static;">
+                  <span class="material-icons-outlined">stacked_bar_chart</span>
+                  <p>Los QR generados se agruparán en un archivo ZIP descargable</p>
+                </div>
+                <div id="batchProgress" class="batch-progress" style="display:none;">
+                  <div class="batch-progress-bar"><div class="batch-progress-fill" id="batchProgressFill"></div></div>
+                  <p id="batchProgressText" class="qr-placeholder-text">Generando...</p>
+                </div>
+              </div>
+              <div class="qr-preview-footer">
+                <p class="qr-placeholder-text">Ideal para negocios con muchos productos o enlaces.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1060,6 +1115,7 @@
       gaMeasurementId: "G-XXXXXXXXXX"
     };
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <script src="./js/utils.js"></script>
   <script src="./js/qr-generator.js"></script>
   <script src="./js/cookie-consent.js"></script>
