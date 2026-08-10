@@ -1,0 +1,81 @@
+.tutorials {
+  padding: 4rem 0;
+}
+
+.tutorials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.tutorial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.tutorial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tutorial-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.tutorial-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.tutorial-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  padding: 1rem 1.25rem 0.25rem;
+}
+
+.tutorial-meta {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 0 1.25rem;
+}
+
+.tutorial-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem 1.25rem;
+}
+
+.tutorial-link:hover {
+  text-decoration: underline;
+}
+
+.tutorial-link .fa-youtube {
+  color: #ff0000;
+  font-size: 1.1rem;
+}
+
+@media (min-width: 768px) {
+  .tutorials-grid {
+    grid-template-columns: 1fr 1fr;
+    max-width: 900px;
+  }
+}
