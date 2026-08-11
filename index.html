@@ -353,9 +353,11 @@
                     <button type="button" class="share-item" data-share="copy" data-name="general"><i class="fas fa-link"></i> Copiar enlace</button>
                   </div>
                 </div>
+                <button id="contextPreviewBtn" class="btn btn-ghost" style="display:none;"><span class="material-icons-outlined">visibility</span> Ver cómo se verá</button>
               </div>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -1130,6 +1132,150 @@
       <div class="cookie-consent-buttons">
         <button id="cookieAccept" class="cookie-btn cookie-btn-accept">Aceptar todas</button>
         <button id="cookieDecline" class="cookie-btn cookie-btn-decline">Solo esenciales</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctx-modal" id="ctxModal" role="dialog" aria-modal="true" aria-labelledby="ctxModalTitle">
+    <div class="ctx-modal-overlay" id="ctxModalOverlay"></div>
+    <div class="ctx-modal-panel">
+      <div class="ctx-modal-head">
+        <div>
+          <div class="ctx-modal-title" id="ctxModalTitle">¿Cómo se verá tu QR?</div>
+          <div class="ctx-modal-sub">Elige una plantilla y míralo en contexto</div>
+        </div>
+        <button type="button" class="ctx-modal-close" id="ctxModalClose" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="context-templates" id="contextTemplates">
+        <button type="button" class="context-template-btn active" data-template="flyer"><i class="fas fa-file-image"></i> Flyer</button>
+        <button type="button" class="context-template-btn" data-template="card"><i class="fas fa-id-card"></i> Tarjeta</button>
+        <button type="button" class="context-template-btn" data-template="post"><i class="fas fa-square"></i> Post</button>
+        <button type="button" class="context-template-btn" data-template="wifi"><i class="fas fa-wifi"></i> WiFi</button>
+        <button type="button" class="context-template-btn" data-template="menu"><i class="fas fa-utensils"></i> Menú</button>
+      </div>
+      <div class="context-stage" id="contextStage">
+        <div class="ctx-template ctx-flyer active" data-ctx="flyer">
+          <div class="ctx-flyer-inner">
+            <div class="ctx-flyer-brand">
+              <div class="ctx-brand-dot"></div>
+              <span>TU MARCA</span>
+            </div>
+            <div class="ctx-flyer-body">
+              <div class="ctx-flyer-tag">NUEVA COLECCIÓN</div>
+              <div class="ctx-flyer-title">Escanea y<br>descubre más</div>
+              <div class="ctx-flyer-desc">Ofertas, promos y contenido exclusivo para ti.</div>
+            </div>
+            <div class="ctx-flyer-qr">
+              <div class="ctx-qr-slot"><img id="ctxQrFlyer" alt="QR preview"></div>
+              <div class="ctx-flyer-qr-text">Escanéame</div>
+            </div>
+            <div class="ctx-flyer-footer">www.tusitio.com · @tumarca</div>
+          </div>
+        </div>
+        <div class="ctx-template ctx-card" data-ctx="card">
+          <div class="ctx-card-inner">
+            <div class="ctx-card-brand">
+              <div class="ctx-brand-dot"></div>
+              <span>TU MARCA</span>
+            </div>
+            <div class="ctx-card-main">
+              <div class="ctx-card-person">
+                <div class="ctx-card-avatar">N</div>
+                <div class="ctx-card-id">
+                  <div class="ctx-card-name">Nombre Apellido</div>
+                  <div class="ctx-card-role">Cargo · Empresa</div>
+                </div>
+              </div>
+              <div class="ctx-qr-slot"><img id="ctxQrCard" alt="QR preview"></div>
+            </div>
+            <div class="ctx-card-contact">
+              <span>✉ nombre@empresa.com</span>
+              <span>✆ +503 1234 5678</span>
+            </div>
+          </div>
+        </div>
+        <div class="ctx-template ctx-post" data-ctx="post">
+          <div class="ctx-post-inner">
+            <div class="ctx-post-top">
+              <div class="ctx-post-user">
+                <div class="ctx-post-avatar">@</div>
+                <span>tuperfil</span>
+              </div>
+              <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <div class="ctx-post-visual">
+              <div class="ctx-qr-slot"><img id="ctxQrPost" alt="QR preview"></div>
+              <span class="ctx-post-sticker">Escanea<br>y sigue ✨</span>
+            </div>
+            <div class="ctx-post-actions">
+              <span><i class="far fa-heart"></i></span>
+              <span><i class="far fa-comment"></i></span>
+              <span><i class="far fa-paper-plane"></i></span>
+              <span class="ctx-post-save"><i class="far fa-bookmark"></i></span>
+            </div>
+            <div class="ctx-post-caption"><b>tuperfil</b> Escanea el código y descubre más contenido ✨ #qr #gratis</div>
+          </div>
+        </div>
+        <div class="ctx-template ctx-wifi" data-ctx="wifi">
+          <div class="ctx-wifi-inner">
+            <div class="ctx-wifi-top">
+              <div class="ctx-wifi-signal">
+                <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true">
+                  <circle cx="32" cy="50" r="6" fill="#ffffff"/>
+                  <path d="M16 32 Q32 16 48 32" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.55"/>
+                  <path d="M8 24 Q32 0 56 24" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+                </svg>
+              </div>
+              <div class="ctx-wifi-title">WiFi <b>Gratis</b></div>
+              <div class="ctx-wifi-sub">Conéctate escaneando</div>
+            </div>
+            <div class="ctx-qr-slot"><img id="ctxQrWifi" alt="QR preview"></div>
+            <div class="ctx-wifi-note">Escanea para conectarte a nuestra red</div>
+            <div class="ctx-wifi-footer">ESTABLECIMIENTO</div>
+          </div>
+        </div>
+        <div class="ctx-template ctx-menu" data-ctx="menu">
+          <div class="ctx-menu-inner">
+            <div class="ctx-menu-head">
+              <div class="ctx-menu-icon">
+                <svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true">
+                  <path d="M20 6v20a8 8 0 0 0 6 7.7V58h6V33.7A8 8 0 0 0 38 26V6h-6v20h-4V6h-8z" fill="#ffffff"/>
+                  <path d="M46 6v52h6V6z" fill="#ffffff"/>
+                </svg>
+              </div>
+              <div class="ctx-menu-name">Restaurante<br><span>Delicia</span></div>
+              <div class="ctx-menu-orn">
+                <svg viewBox="0 0 120 10" width="120" height="10" aria-hidden="true">
+                  <line x1="0" y1="5" x2="45" y2="5" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
+                  <circle cx="60" cy="5" r="2.5" fill="#ffffff"/>
+                  <line x1="75" y1="5" x2="120" y2="5" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
+                </svg>
+              </div>
+              <div class="ctx-menu-sub">Desde 1990</div>
+            </div>
+            <div class="ctx-menu-body">
+              <div class="ctx-menu-section">Especialidades</div>
+              <div class="ctx-menu-line"><span>Platillo de la casa</span><span>$8.50</span></div>
+              <div class="ctx-menu-line"><span>Parrillada</span><span>$12.00</span></div>
+              <div class="ctx-menu-divider"><svg viewBox="0 0 120 6" width="120" height="6"><line x1="0" y1="3" x2="120" y2="3" stroke="#d97706" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/></svg></div>
+              <div class="ctx-menu-section">Bebidas</div>
+              <div class="ctx-menu-line"><span>Jugo natural</span><span>$2.50</span></div>
+              <div class="ctx-menu-line"><span>Café</span><span>$1.50</span></div>
+            </div>
+            <div class="ctx-menu-qr">
+              <div class="ctx-menu-qr-label">¿Pedir más?</div>
+              <div class="ctx-qr-slot"><img id="ctxQrMenu" alt="QR preview"></div>
+              <div class="ctx-menu-note">Escanea para ver el menú completo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ctx-modal-foot">
+        <p class="ctx-hint"><i class="fas fa-info-circle"></i> Es solo un ejemplo visual. Tu QR real se descarga en el panel con la calidad que elijas.</p>
+        <div class="ad-container ctx-modal-ad">
+          <p class="ad-label">Publicidad</p>
+          <div class="ad-placeholder"><!-- AD CODE HERE --> Anuncio 728x90</div>
+        </div>
       </div>
     </div>
   </div>

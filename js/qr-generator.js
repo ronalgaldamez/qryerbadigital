@@ -43,6 +43,41 @@
         document.getElementById("generateBtn")?.addEventListener("click", generarQR);
         document.getElementById("downloadBtn")?.addEventListener("click", () => descargarQR(qrCode, "qr_general", "general"));
 
+        // Vista previa en contexto (modal)
+        document.querySelectorAll('.context-template-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.context-template-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const tpl = btn.dataset.template;
+                document.querySelectorAll('.ctx-template').forEach(t => t.classList.remove('active'));
+                document.querySelector(`.ctx-template[data-ctx="${tpl}"]`)?.classList.add('active');
+                actualizarContextoQR();
+            });
+        });
+
+        const ctxModal = document.getElementById("ctxModal");
+        const ctxModalClose = document.getElementById("ctxModalClose");
+        const ctxModalOverlay = document.getElementById("ctxModalOverlay");
+        const ctxPreviewBtn = document.getElementById("contextPreviewBtn");
+
+        function abrirContexto() {
+            if (!ctxModal) return;
+            ctxModal.classList.add("open");
+            actualizarContextoQR();
+            document.body.style.overflow = "hidden";
+        }
+        function cerrarContexto() {
+            if (!ctxModal) return;
+            ctxModal.classList.remove("open");
+            document.body.style.overflow = "";
+        }
+        ctxPreviewBtn?.addEventListener("click", abrirContexto);
+        ctxModalClose?.addEventListener("click", cerrarContexto);
+        ctxModalOverlay?.addEventListener("click", cerrarContexto);
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && ctxModal?.classList.contains("open")) cerrarContexto();
+        });
+
         // Historial
         renderizarHistorial();
         document.getElementById("clearHistory")?.addEventListener("click", () => {
@@ -275,6 +310,24 @@
         if (btn) btn.style.display = 'inline-flex';
         const shareBtn = document.getElementById(shareBtnId);
         if (shareBtn) shareBtn.style.display = 'inline-flex';
+        const ctxBtn = document.getElementById("contextPreviewBtn");
+        if (ctxBtn) ctxBtn.style.display = 'inline-flex';
+    }
+
+    async function actualizarContextoQR() {
+        if (!qrCode || !qrCode._options || !qrCode._options.data) return;
+        try {
+            const temporal = new QRCodeStyling(Object.assign({}, qrCode._options, { width: 300, height: 300 }));
+            const blob = await temporal.getRawData("png");
+            const url = URL.createObjectURL(blob);
+            document.querySelectorAll('.ctx-qr-slot img').forEach(img => {
+                if (img.dataset.url) URL.revokeObjectURL(img.dataset.url);
+                img.src = url;
+                img.dataset.url = url;
+            });
+        } catch (err) {
+            console.error("Error al generar la vista previa en contexto:", err);
+        }
     }
 
     async function descargarQR(qrInstancia, nombreBase, sufijo) {
@@ -390,6 +443,7 @@
         if (!url) return alert("Ingresa una URL o texto.");
         qrCode.update({ data: url });
         mostrarQR("body-general", "downloadBtn", "shareBtn");
+        actualizarContextoQR();
 
         const entry = {
             url,

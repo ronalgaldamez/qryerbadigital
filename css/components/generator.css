@@ -687,6 +687,682 @@
   transition: width 0.3s ease;
 }
 
+/* ------------------------- Modal de vista previa en contexto ------------------------- */
+.ctx-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.ctx-modal.open {
+  display: flex;
+}
+
+.ctx-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.ctx-modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  animation: ctxModalIn 0.25s ease;
+}
+
+@keyframes ctxModalIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.ctx-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.ctx-modal-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.ctx-modal-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.ctx-modal-close {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+
+.ctx-modal-close:hover {
+  color: white;
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.ctx-modal-foot {
+  border-top: 1px solid var(--border-light);
+}
+
+.ctx-modal-ad {
+  margin: 0.5rem 1.25rem 1.25rem;
+  padding: 0.75rem;
+}
+
+.ctx-modal-ad .ad-placeholder {
+  min-height: 90px;
+  max-width: 468px;
+  font-size: 0.75rem;
+}
+
+.context-templates {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.35rem;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.context-template-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.context-template-btn i {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.context-template-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.context-template-btn:hover i {
+  color: var(--accent);
+}
+
+.context-template-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.context-template-btn.active i {
+  color: white;
+}
+
+.context-stage {
+  padding: 1.75rem 1.25rem;
+  background:
+    radial-gradient(400px 200px at 20% 0%, rgba(108, 92, 231, 0.08), transparent 60%),
+    #eef0f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+[data-theme="dark"] .context-stage {
+  background:
+    radial-gradient(400px 200px at 20% 0%, rgba(139, 124, 247, 0.1), transparent 60%),
+    #0b1220;
+}
+
+.ctx-template {
+  display: none;
+  animation: ctxFade 0.25s ease;
+}
+
+.ctx-template.active {
+  display: flex;
+}
+
+@keyframes ctxFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.ctx-qr-slot {
+  background: #fff;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+
+.ctx-qr-slot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* -- Flyer promocional -- */
+.ctx-flyer-inner {
+  width: 236px;
+  aspect-ratio: 8.5 / 11;
+  background: #f7f6fd;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.ctx-flyer-inner::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,92,231,0.18), transparent 70%);
+}
+
+.ctx-flyer-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 14px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #6c5ce7;
+  border-bottom: 1px solid #eceaea;
+}
+
+.ctx-brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  flex-shrink: 0;
+}
+
+.ctx-flyer-body {
+  padding: 18px 16px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.ctx-flyer-tag {
+  align-self: flex-start;
+  background: #6c5ce7;
+  color: white;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.ctx-flyer-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #1e1b3a;
+}
+
+.ctx-flyer-desc {
+  font-size: 0.58rem;
+  color: #8b86a5;
+  line-height: 1.5;
+}
+
+.ctx-flyer-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 0 14px;
+}
+
+.ctx-flyer .ctx-qr-slot {
+  width: 108px;
+  height: 108px;
+}
+
+.ctx-flyer-qr-text {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #6c5ce7;
+}
+
+.ctx-flyer-footer {
+  text-align: center;
+  font-size: 0.5rem;
+  color: #b6b2cc;
+  padding: 8px;
+  border-top: 1px solid #eceaea;
+  letter-spacing: 0.04em;
+}
+
+/* -- Tarjeta de presentación -- */
+.ctx-card-inner {
+  width: 250px;
+  aspect-ratio: 85.6 / 54;
+  background: linear-gradient(135deg, #ffffff 0%, #f6f4ff 100%);
+  border-radius: 10px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ctx-card-inner::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  bottom: -30px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(108,92,231,0.06);
+}
+
+.ctx-card-brand {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #6c5ce7;
+}
+
+.ctx-card-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.ctx-card-person {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ctx-card-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.ctx-card-name {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #1e1b3a;
+}
+
+.ctx-card-role {
+  font-size: 0.5rem;
+  color: #8b86a5;
+  font-weight: 600;
+}
+
+.ctx-card .ctx-qr-slot {
+  width: 66px;
+  height: 66px;
+  padding: 4px;
+}
+
+.ctx-card-contact {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.46rem;
+  color: #a5a0bd;
+  padding-top: 7px;
+  border-top: 1px solid #ece9f4;
+}
+
+/* -- Post de Instagram -- */
+.ctx-post-inner {
+  width: 212px;
+  aspect-ratio: 1 / 1;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.ctx-post-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  color: #262626;
+  font-size: 0.6rem;
+}
+
+.ctx-post-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.ctx-post-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+}
+
+.ctx-post-visual {
+  flex: 1;
+  background: linear-gradient(160deg, #2dd4bf 0%, #0ea5e9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.ctx-post .ctx-qr-slot {
+  width: 96px;
+  height: 96px;
+}
+
+.ctx-post-sticker {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(255,255,255,0.92);
+  color: #0ea5e9;
+  font-size: 0.52rem;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transform: rotate(-6deg);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.ctx-post-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 10px;
+  font-size: 0.8rem;
+  color: #262626;
+}
+
+.ctx-post-actions .ctx-post-save {
+  margin-left: auto;
+}
+
+.ctx-post-caption {
+  padding: 0 10px 9px;
+  font-size: 0.52rem;
+  color: #8a8a8a;
+  line-height: 1.4;
+}
+
+/* -- Cartel WiFi -- */
+.ctx-wifi-inner {
+  width: 210px;
+  background: linear-gradient(180deg, #6c5ce7 0%, #5a4bd1 100%);
+  border-radius: 18px;
+  box-shadow: 0 14px 32px rgba(90,75,209,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px 0;
+  overflow: hidden;
+  color: white;
+}
+
+.ctx-wifi-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ctx-wifi-signal {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.ctx-wifi-title {
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.ctx-wifi-title b {
+  font-weight: 800;
+}
+
+.ctx-wifi-sub {
+  font-size: 0.6rem;
+  opacity: 0.85;
+}
+
+.ctx-wifi .ctx-qr-slot {
+  width: 106px;
+  height: 106px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 6px;
+}
+
+.ctx-wifi-note {
+  font-size: 0.6rem;
+  opacity: 0.9;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.ctx-wifi-footer {
+  width: 100%;
+  text-align: center;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  opacity: 0.8;
+  padding: 8px;
+  border-top: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+}
+
+/* -- Menú de restaurante -- */
+.ctx-menu-inner {
+  width: 214px;
+  background: #fffdf8;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.ctx-menu-head {
+  background: linear-gradient(135deg, #92400e, #d97706);
+  color: white;
+  text-align: center;
+  padding: 16px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.ctx-menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ctx-menu-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+}
+
+.ctx-menu-name span {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  font-style: italic;
+}
+
+.ctx-menu-sub {
+  font-size: 0.5rem;
+  opacity: 0.85;
+  letter-spacing: 0.2em;
+}
+
+.ctx-menu-body {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ctx-menu-section {
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #b45309;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.ctx-menu-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.56rem;
+  color: #57534e;
+}
+
+.ctx-menu-line span:first-child {
+  flex: 1;
+  border-bottom: 1px dotted #d6d3d1;
+}
+
+.ctx-menu-line span:last-child {
+  font-weight: 700;
+  color: #1c1917;
+}
+
+.ctx-menu-divider {
+  display: flex;
+  justify-content: center;
+  padding: 2px 0;
+}
+
+.ctx-menu-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid #f0ece2;
+  background: #fdfaf2;
+}
+
+.ctx-menu-qr-label {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #b45309;
+}
+
+.ctx-menu .ctx-qr-slot {
+  width: 84px;
+  height: 84px;
+}
+
+.ctx-menu-note {
+  font-size: 0.5rem;
+  color: #a8a29e;
+  text-align: center;
+}
+
+.ctx-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
 .pro-panel {
   display: none;
 }
