@@ -46,6 +46,29 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
   });
 });
 
+// Desplegable "Más" del menú
+const navDropdown = document.getElementById("navDropdown");
+const navDropdownToggle = document.getElementById("navDropdownToggle");
+if (navDropdown && navDropdownToggle) {
+  navDropdownToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    navDropdown.classList.toggle("open");
+  });
+  document.addEventListener("click", (e) => {
+    if (!navDropdown.contains(e.target)) {
+      navDropdown.classList.remove("open");
+    }
+  });
+  navDropdown.querySelectorAll(".nav-dropdown-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      navDropdown.classList.remove("open");
+      if (document.body.classList.contains("nav-open")) {
+        document.body.classList.remove("nav-open");
+      }
+    });
+  });
+}
+
 // Funcionalidad del acordeón de personalización avanzada
 const advancedToggle = document.getElementById("advancedToggle");
 if (advancedToggle) {

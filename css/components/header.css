@@ -90,6 +90,75 @@
   color: white;
 }
 
+/* Desplegable "Más" */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition);
+}
+
+.nav-dropdown-toggle:hover {
+  color: var(--text);
+}
+
+.nav-dropdown-toggle .fa-chevron-down {
+  font-size: 0.7rem;
+  transition: transform var(--transition);
+}
+
+.nav-dropdown.open .nav-dropdown-toggle .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  padding: 0.4rem;
+  min-width: 170px;
+  z-index: 120;
+}
+
+.nav-dropdown.open .nav-dropdown-menu {
+  display: block;
+}
+
+.nav-dropdown-link {
+  display: block;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--transition);
+}
+
+.nav-dropdown-link:hover {
+  background: var(--bg-secondary);
+  color: var(--accent);
+}
+
 /* Botón de tema */
 .theme-toggle {
   width: 36px;
@@ -167,6 +236,34 @@
 .nav-open .nav-links .nav-register {
   text-align: center;
   margin-top: 8px;
+}
+
+.nav-open .nav-dropdown {
+  width: 100%;
+}
+
+.nav-open .nav-dropdown-toggle {
+  width: 100%;
+  justify-content: space-between;
+  font-size: 1rem;
+  padding: 8px 0;
+}
+
+.nav-open .nav-dropdown-menu {
+  position: static;
+  transform: none;
+  box-shadow: none;
+  border: none;
+  border-left: 2px solid var(--border-light);
+  border-radius: 0;
+  padding: 0 0 0 0.75rem;
+  margin-top: 0.25rem;
+  background: transparent;
+}
+
+.nav-open .nav-dropdown-link {
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
 }
 
 body.nav-open {
