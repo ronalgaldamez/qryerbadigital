@@ -25,9 +25,9 @@
 .testimonial-rating {
   display: flex;
   gap: 2px;
-  color: #f59e0b;
+  color: var(--accent);
   margin-bottom: 0.75rem;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
 }
 
 .testimonial-text {
@@ -46,14 +46,16 @@
 .author-avatar {
   width: 40px;
   height: 40px;
-  background: var(--accent);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--accent);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  flex-shrink: 0;
 }
 
 .author-name {
